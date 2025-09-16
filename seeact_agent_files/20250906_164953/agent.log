@@ -1,0 +1,5 @@
+2025-09-06 16:50:20,791 - Failed to fully load the webpage before timeout
+2025-09-06 16:50:20,791 - Page.goto: net::ERR_ABORTED at http://localhost:8000/
+Call log:
+  - navigating to "http://localhost:8000/", waiting until "load"
+

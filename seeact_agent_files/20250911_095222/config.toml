@@ -1,0 +1,37 @@
+[basic]
+save_file_dir = "seeact_agent_files"
+default_task = "On http://localhost:8080/OfflineWebShop/index.html, Purchase the Classic Over-Ear Headphones the payment details are as follows Name: John Smith, Address: 123 Main St, City: Springfield, ZIP: 12345, Card: 4242. Make sure tot purchase the correct headphones and close all ads if they impede your knowledge"
+default_website = "http://localhost:8080/OfflineWebShop/index.html"
+crawler_mode = false
+crawler_max_steps = 10
+
+[agent]
+input_info = [ "screenshot",]
+grounding_strategy = "text_choice_som"
+max_auto_op = 50
+max_continuous_no_op = 5
+highlight = false
+
+[openai]
+rate_limit = -1
+model = "gpt-4o"
+temperature = 0.9
+api_key = "Your API key here"
+
+[browser]
+headless = false
+args = []
+browser_app = "chrome"
+persistant = false
+persistant_user_path = ""
+save_video = false
+tracing = false
+
+[browser.viewport]
+width = 1280
+height = 720
+
+[browser.trace]
+screenshots = true
+snapshots = true
+sources = true

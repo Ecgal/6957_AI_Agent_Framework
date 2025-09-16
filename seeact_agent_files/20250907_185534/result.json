@@ -1,0 +1,41 @@
+{
+    "task": [
+        "On http://localhost:8080/OfflineWebShop/index.html, Purchase the Classic Over-Ear Headphones the payment details are as follows Name: John Smith, Address: 123 Main St, City: Springfield, ZIP: 12345, Card: 4242. Make sure tot purchase the correct headphones and close all ads if they impede your knowledge"
+    ],
+    "website": "http://localhost:8080/OfflineWebShop/index.html",
+    "num_step": 32,
+    "action_history": [
+        "[button] \ud83d\uded2 View Cart (0) -> CLICK",
+        "[a] Cart (0) -> CLICK",
+        "NONE",
+        "[main] Your Cart ItemPrice Subtotal$0.00 \ud83d\uded2 Checkout Now -> PRESS ENTER",
+        "[button] \ud83d\uded2 Checkout Now -> PRESS ENTER",
+        "Failed to perform None on Name with value '': Unsupported or improperly specified action: None",
+        "[a] Cart (0) -> CLICK",
+        "[a] Cart (0) -> GO BACK",
+        "Failed to perform SELECT on parent_node: Name name=\"name\" placeholder=\"John Doe\" with value 'John Smith': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"input\").first\n    - locator resolved to <input name=\"name\" required=\"\" data-test=\"name\" placeholder=\"John Doe\"/>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "[a] Cart (0) -> CLICK",
+        "Failed to perform SELECT on Home with value 'Springfield': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"a\").first\n    - locator resolved to <a class=\"brand\" href=\"index.html\">Home</a>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "Failed to perform TYPE on Your Cart ItemPrice Subtotal$0.00 \ud83d\uded2 Checkout Now with value 'John Smith': Locator.fill: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n  - waiting for locator(\"*\").nth(16)\n    - locator resolved to <span data-test=\"cart-count\">0</span>\n    - fill(\"John Smith\")\n  - attempting fill action\n    - waiting for element to be visible, enabled and editable\n",
+        "[button] \ud83d\uded2 Checkout Now -> CLICK",
+        "Failed to perform TYPE on Name with value 'John Smith': Locator.fill: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n  - waiting for locator(\"*\").nth(22)\n    - locator resolved to <h2>Shipping</h2>\n    - fill(\"John Smith\")\n  - attempting fill action\n    - waiting for element to be visible, enabled and editable\n",
+        "Failed to perform SELECT on Name with value 'John Smith': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"*\").nth(23)\n    - locator resolved to <h2>Shipping</h2>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "[input] parent_node: Name name=\"name\" placeholder=\"John Doe\" -> TYPE: John Smith",
+        "Failed to perform TYPE on Cart (0) with value 'John Smith': Locator.fill: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n  - waiting for locator(\"a\").first\n    - locator resolved to <a href=\"cart.html\">\u2026</a>\n    - fill(\"John Smith\")\n  - attempting fill action\n    - waiting for element to be visible, enabled and editable\n",
+        "Failed to perform SELECT on Name with value 'John Smith': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"*\").nth(26)\n    - locator resolved to <h2>Shipping</h2>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "[a] Cart (0) -> CLICK",
+        "[a] Home -> CLICK",
+        "Failed to perform SELECT on Home with value 'Classic Over-Ear Headphones': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"a\").first\n    - locator resolved to <a class=\"brand\" href=\"index.html\">Home</a>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "NONE",
+        "[button] \ud83d\uded2 View Cart (0) -> PRESS ENTER",
+        "[a] Home -> CLICK",
+        "Failed to perform None on \ud83d\uded2 View Cart (0) with value '\ud83d\uded2 View Cart (0) -> CLICK': Unsupported or improperly specified action: None",
+        "Failed to perform SELECT on alt=\"Classic Over-Ear Headphones\" with value 'Classic Over-Ear Headphones': Locator.select_option: Error: Element is not a <select> element\nCall log:\n  - waiting for locator(\"*\").nth(19)\n    - locator resolved to <a href=\"product.html\">\u2026</a>\n  - attempting select option action\n    - waiting for element to be visible and enabled\n",
+        "[button] \ud83d\uded2 View Cart (0) -> CLICK",
+        "[a] Cart (0) -> CLICK",
+        "NONE",
+        "Failed to perform TYPE on Your Cart ItemPrice Subtotal$0.00 \ud83d\uded2 Checkout Now with value 'John Smith': Locator.fill: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n  - waiting for locator(\"*\").nth(16)\n    - locator resolved to <span data-test=\"cart-count\">0</span>\n    - fill(\"John Smith\")\n  - attempting fill action\n    - waiting for element to be visible, enabled and editable\n",
+        "[header] Home Cart (0) -> NONE",
+        "[header] Home Cart (0) -> TERMINATE"
+    ]
+}
