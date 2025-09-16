@@ -1,0 +1,196 @@
+/* Tesla-ish Base Styles - Created with GPT-5*/
+
+/* ----- Fonts & Text ----- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  color: #212121;        /* dark grey text */
+  background-color: #fafafa;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  color: #212121;
+  margin: 1rem 0 0.5rem;
+}
+
+/* ----- Links ----- */
+a {
+  color: #cc0000;         /* Tesla red for links/highlight items */
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
+/* ----- Buttons ----- */
+.btn, button {
+  font-family: inherit;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #cc0000;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  border: 2px solid #cc0000;
+  color: #cc0000;
+}
+
+.btn:hover, button:hover {
+  background-color: #a30000;
+}
+
+/* ----- Layout Helpers ----- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.two-col {
+  display: flex;
+  gap: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ----- Cards / Product Cards ----- */
+.card {
+  background-color: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+}
+
+/* ----- Header / Nav ----- */
+.header {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.header .brand {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #212121;
+  text-decoration: none;
+}
+
+/* ----- Forms / Inputs ----- */
+input, select, textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #cc0000;
+  box-shadow: 0 0 0 3px rgba(204, 0, 0, 0.2);
+}
+
+/* ----- Footer ----- */
+.footer {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  background-color: #f2f2f2;
+  color: #424242;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+/* ----- Utilities ----- */
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ----- Tesla-Specific Highlights ----- */
+.btn-primary {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+.btn-secondary {
+  border: 2px solid #cc0000;
+  color: #cc0000;
+  background-color: transparent;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.overlay .overlay-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 90%;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* responsiveness simple breakpoints */
+@media (max-width: 768px) {
+  .two-col {
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn, button {
+    width: 100%;
+    text-align: center;
+  }
+}
