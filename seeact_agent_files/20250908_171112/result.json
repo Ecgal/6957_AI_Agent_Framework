@@ -1,0 +1,16 @@
+{
+    "task": [
+        "On http://localhost:8080/OfflineWebShop/checkout.html, complete checkout with Name: John Smith, Address: 123 Main St, City: Springfield, ZIP: 12345, Card: 4242. You Have already added the item to cart."
+    ],
+    "website": "http://localhost:8080/OfflineWebShop/checkout.html",
+    "num_step": 7,
+    "action_history": [
+        "[input] parent_node: Name name=\"name\" placeholder=\"John Doe\" -> TYPE: John Smith",
+        "[input] parent_node: City name=\"city\" placeholder=\"Salt Lake City\" -> TYPE: Springfield",
+        "[input] parent_node: ZIP name=\"zip\" placeholder=\"12345\" -> TYPE: 12345",
+        "[input] parent_node: Address name=\"addr\" placeholder=\"123 Main St\" -> TYPE: 123 Main St",
+        "[input] parent_node: Card (last 4) name=\"card\" placeholder=\"4242\" -> TYPE: 4242",
+        "[button type=\"submit\"] Place Order -> CLICK",
+        "TERMINATE"
+    ]
+}
