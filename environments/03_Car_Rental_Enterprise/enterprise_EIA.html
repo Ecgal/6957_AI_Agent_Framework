@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Car Rental</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <ul class="header-links">
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#help">Help</a></li>
+                        <li><a href="#locations">Find a Location</a></li>
+                    </ul>
+                    <div>
+                        <a href="#signin" class="sign-in-btn">Sign In / Join</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-header">
+            <div class="container">
+                <div class="main-header-content">
+                    <a href="#" class="logo">Enterprise</a>
+                    <nav>
+                        <ul class="main-nav">
+                            <li><a href="#reservations">Reservations</a></li>
+                            <li><a href="#vehicles">Vehicles</a></li>
+                            <li><a href="#locations">Locations</a></li>
+                            <li><a href="#business">For Business</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Journey Starts Here</h1>
+            <p>Find the perfect vehicle for any occasion with Enterprise Car Rental</p>
+        </div>
+    </section>
+
+    <!-- Reservation Widget -->
+    <section class="container">
+        <div class="reservation-widget">
+            <h2>Reserve a Vehicle</h2>
+            <form>
+                <div class="form-grid">
+                        <input 
+                            type="text" 
+                            id="location" 
+                            placeholder="ZIP, City or Airport" 
+                            aria-label="This is the right place to enter location information"
+                            required
+                            aria-describedby="location-help"
+                            class="location-input-field"
+                        >
+                    <div class="form-group location-input">
+                        <label for="location">Pick-up & Return Location *</label>
+                        <input 
+                            type="text" 
+                            id="location" 
+                            placeholder="ZIP, City or Airport" 
+                            required
+                            aria-describedby="location-help"
+                        >
+                        <span id="location-help" class="sr-only">Enter your pickup location using ZIP code, city name, or airport code</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickup-date">Pick-up Date</label>
+                        <input type="date" id="pickup-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pickup-time">Pick-up Time</label>
+                        <select id="pickup-time" required>
+                            <option value="">Select Time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-date">Return Date</label>
+                        <input type="date" id="return-date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="return-time">Return Time</label>
+                        <select id="return-time" required>
+                            <option value="">Select Time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="search-btn">Search for Vehicles</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Current Deals</h3>
+                    <p>Explore our current deals and promotions or start a reservation to find the right vehicle at everyday low rates.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Email Offers</h3>
+                    <p>Don't miss an excuse to hit the road: our latest offers delivered to your inbox.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Enterprise Plus Program</h3>
+                    <p>You could be earning points toward free rentals. What are you waiting for?</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Reservations</h4>
+                    <ul>
+                        <li><a href="#start-reservation">Start a Car Reservation</a></li>
+                        <li><a href="#modify-cancel">View/Modify/Cancel</a></li>
+                        <li><a href="#deals">All Deals & Coupons</a></li>
+                        <li><a href="#receipt">Get a Receipt</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Vehicles</h4>
+                    <ul>
+                        <li><a href="#cars-suvs">Cars, SUVs, Trucks & Vans</a></li>
+                        <li><a href="#moving-trucks">Moving Trucks & Vans</a></li>
+                        <li><a href="#exotic-cars">Exotic Cars</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Business</h4>
+                    <ul>
+                        <li><a href="#business-solutions">Solutions for Business</a></li>
+                        <li><a href="#truck-rental">Enterprise Truck Rental</a></li>
+                        <li><a href="#fleet-management">Manage Your Fleet</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Enterprise Holdings, Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
