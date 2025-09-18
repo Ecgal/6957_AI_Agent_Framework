@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" class="responsive">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Steam — Simple Home</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="steam-header">
+    <div class="header-content">
+      <a href="#" class="steam-logo">STEAM</a>
+      <nav class="main-nav">
+        <a class="nav-item" href="#">STORE</a>
+        <a class="nav-item" href="#">COMMUNITY</a>
+        <a class="nav-item" href="#">buckeye.foobar</a>
+        <a class="nav-item" href="#">CHAT</a>
+        <a class="nav-item" href="#">SUPPORT</a>
+      </nav>
+      <div class="user-actions">
+        <a href="#" class="install-steam-btn">Install Steam</a>
+        <a href="#" class="user-profile">buckeye.foobar</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Store nav -->
+  <div class="store-nav-container">
+    <div class="store-nav">
+      <div class="store-tabs">
+        <a class="store-tab active" href="#">Your Store</a>
+        <a class="store-tab" href="#">New &amp; Noteworthy</a>
+        <a class="store-tab" href="#">Categories</a>
+        <a class="store-tab" href="#">Points Shop</a>
+        <a class="store-tab" href="#">News</a>
+        <a class="store-tab" href="#">Labs</a>
+      </div>
+      <div class="search-area">
+        <input class="search-box" type="text" placeholder="search"/>
+        <a class="header-btn" href="#">Wishlist(1)</a>
+        <a class="header-btn" href="cart.html" id="cartButton" style="position:relative">
+          Cart(<span id="cartCount">0</span>)
+          <div class="cart-badge" id="cartBadge" style="display:none;">0</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid: Left rail + Content -->
+  <div class="page">
+    <!-- Left rail -->
+    <aside class="rail">
+      <h4>Browse by Category</h4>
+      <a href="#">Top Sellers</a>
+      <a href="#">New Releases</a>
+      <a href="#">Upcoming</a>
+      <a href="#">Specials</a>
+      <a href="#">VR</a>
+      <a href="#">Controller-Friendly</a>
+      <div style="padding:12px 14px">
+        <div style="margin-top:6px">
+          <span class="pill">Action</span>
+          <span class="pill">Adventure</span>
+          <span class="pill">RPG</span>
+          <span class="pill">Strategy</span>
+          <span class="pill">Indie</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+
+      <!-- Billboard -->
+      <section class="billboard">
+        <div class="billboard-left" id="bbMain">
+          <div class="bb-info">
+            <div class="bb-title" id="bbTitle">Red Dead Redemption 2</div>
+            <div class="bb-tags" id="bbTags">
+              <span class="bb-tag">Open World</span>
+              <span class="bb-tag">Story Rich</span>
+              <span class="bb-tag">Adventure</span>
+            </div>
+            <div class="bb-deal">
+              <div class="pct">-67%</div>
+              <div class="price">
+                <span class="strike">$59.99</span>
+                <span class="final">$19.79</span>
+              </div>
+            </div>
+          </div>
+          <div class="bb-cta">
+            <button class="btn" onclick="addToCartFromBillboard()">Add to Cart</button>
+          </div>
+        </div>
+
+        <div class="billboard-right" id="bbList">
+          <div class="bb-thumb" data-title="Red Dead Redemption 2" data-pct="-67%" data-strike="$59.99" data-final="$19.79" data-tags="Open World,Story Rich,Adventure">
+            <img alt="" src="img/game1.jpg">
+            <div>
+              <div class="t">Red Dead Redemption 2</div>
+              <div class="sub">Very Positive</div>
+            </div>
+          </div>
+          <div class="bb-thumb" data-title="Valheim" data-pct="-30%" data-strike="$19.99" data-final="$13.99" data-tags="Survival,Online Co-op,Open World">
+            <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='100'%3E%3Crect width='100%25' height='100%25' fill='%231e3a52'/%3E%3C/svg%3E">
+            <div>
+              <div class="t">Valheim</div>
+              <div class="sub">Overwhelmingly Positive</div>
+            </div>
+          </div>
+          <div class="bb-thumb" data-title="Battlefield 2042" data-pct="-70%" data-strike="$59.99" data-final="$17.99" data-tags="Shooter,Multiplayer,FPS">
+            <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23122b3b'/%3E%3C/svg%3E">
+            <div>
+              <div class="t">Battlefield 2042</div>
+              <div class="sub">Mostly Negative</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommended section -->
+      <section class="featured-section row" style="padding:12px">
+        <div class="section-hd" style="padding:0 4px 6px">
+          <h3>Recommended For You</h3>
+        </div>
+        <div class="featured-carousel">
+          <div class="game-card">
+            <img class="game-image" src="img/game2V.jpg" width="320px">
+            <div class="game-info">
+              <h3 class="game-title">Valheim</h3>
+              <div class="game-reviews">
+                <span class="review-summary positive">Overwhelmingly Positive</span>
+                <span class="review-count">(341,089)</span>
+              </div>
+              <div class="game-tags">
+                <span class="game-tag">Open World Survival Craft</span>
+                <span class="game-tag">Survival</span>
+                <span class="game-tag">Online Co-Op</span>
+              </div>
+              <div class="game-pricing">
+                <span class="discount-pct">-30%</span>
+                <span class="price-original">$19.99</span>
+                <span class="price-final">$13.99</span>
+              </div>
+              <button class="add-to-cart-btn" onclick="addToCart('Valheim', 13.99)">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <img class="game-image" src="img/game3.jpg" width="320px">
+            <div class="game-info">
+              <h3 class="game-title">Battlefield 2042</h3>
+              <div class="game-reviews">
+                <span class="review-summary negative">Mostly Negative</span>
+                <span class="review-count">(136,241)</span>
+              </div>
+              <div class="game-tags">
+                <span class="game-tag">Shooter</span><span class="game-tag">Multiplayer</span><span class="game-tag">FPS</span>
+              </div>
+              <div class="game-pricing">
+                <span class="discount-pct">-70%</span>
+                <span class="price-original">$59.99</span>
+                <span class="price-final">$17.99</span>
+              </div>
+              <button class="add-to-cart-btn" onclick="addToCart('Battlefield 2042', 17.99)">Add to Cart</button>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <img class="game-image" src="img/game1.jpg" width="320px">
+            <div class="game-info">
+              <h3 class="game-title">Red Dead Redemption 2</h3>
+              <div class="game-reviews">
+                <span class="review-summary positive">Very Positive</span>
+                <span class="review-count">(350,493)</span>
+              </div>
+              <div class="game-tags">
+                <span class="game-tag">Open World</span><span class="game-tag">Story Rich</span><span class="game-tag">Adventure</span>
+              </div>
+              <div class="game-pricing">
+                <span class="discount-pct">-67%</span>
+                <span class="price-original">$59.99</span>
+                <span class="price-final">$19.79</span>
+              </div>
+              <button class="add-to-cart-btn" onclick="addToCart('Red Dead Redemption 2', 19.79)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      <a href="#">About Valve</a> ·
+      <a href="#">Jobs</a> ·
+      <a href="#">Steamworks</a> ·
+      <a href="#">Privacy Policy</a> ·
+      <a href="#">Legal</a> ·
+      <a href="#">Subscriptions</a> ·
+      <a href="#">Refunds</a>
+    </div>
+    <div style="margin-top:8px">© Valve Corporation. All trademarks are property of their respective owners.</div>
+  </footer>
+
+  <script>
+    // Shopping cart functionality
+    let cart = JSON.parse(localStorage.getItem('steamCart')) || [];
+
+    function addToCart(gameName, price) {
+      const existingItem = cart.find(item => item.name === gameName);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({
+          name: gameName,
+          price: price,
+          quantity: 1
+        });
+      }
+      
+      localStorage.setItem('steamCart', JSON.stringify(cart));
+      updateCartDisplay();
+      
+      // Show feedback
+      const button = event.target;
+      const originalText = button.textContent;
+      button.textContent = 'Added!';
+      button.style.background = '#4c6c22';
+      
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '';
+      }, 1000);
+    }
+
+    function addToCartFromBillboard() {
+      const title = document.getElementById('bbTitle').textContent;
+      const priceText = document.querySelector('.bb-deal .final').textContent;
+      const price = parseFloat(priceText.replace('$', ''));
+      
+      addToCart(title, price);
+    }
+
+    function updateCartDisplay() {
+      const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+      document.getElementById('cartCount').textContent = cartCount;
+      
+      const badge = document.getElementById('cartBadge');
+      if (cartCount > 0) {
+        badge.style.display = 'flex';
+        badge.textContent = cartCount;
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    // Initialize cart display on page load
+    updateCartDisplay();
+
+    // Billboard swapping like Steam thumbnails
+    const bbTitle = document.getElementById('bbTitle');
+    const bbTagsWrap = document.getElementById('bbTags');
+    document.getElementById('bbList').addEventListener('click', (e) => {
+      const item = e.target.closest('.bb-thumb');
+      if (!item) return;
+      const t = item.dataset.title;
+      const pct = item.dataset.pct;
+      const strike = item.dataset.strike;
+      const fin = item.dataset.final;
+      const tags = (item.dataset.tags || '').split(',').map(s => s.trim()).filter(Boolean);
+
+      bbTitle.textContent = t;
+      bbTagsWrap.innerHTML = tags.map(s => `<span class="bb-tag">${s}</span>`).join('');
+      // Update deal area
+      const deal = document.querySelector('.bb-deal');
+      deal.innerHTML = `
+        <div class="pct">${pct}</div>
+        <div class="price"><span class="strike">${strike}</span><span class="final">${fin}</span></div>
+      `;
+    });
+
+    // Keep your horizontal drag on the Recommended rail
+    const carousel = document.querySelector('.featured-carousel');
+    let isDown = false, startX = 0, scrollLeft = 0;
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+      carousel.style.cursor = 'grabbing';
+    });
+    ['mouseleave', 'mouseup'].forEach(evt => carousel.addEventListener(evt, () => {
+      isDown = false;
+      carousel.style.cursor = 'grab';
+    }));
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>
