@@ -20,11 +20,6 @@ if task == EI_Prompt:
 else:
     website = "http://localhost:8080/OfflineWebShop/index.html"
 
-
-
-
-
-
 async def run_agent():
     agent = SeeActAgent(model="gpt-4o", default_website=website,
                         default_task= task)

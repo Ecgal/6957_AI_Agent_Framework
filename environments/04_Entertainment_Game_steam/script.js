@@ -95,7 +95,7 @@
       const walk = (x - startX) * 2;
       carousel.scrollLeft = scrollLeft - walk;
     });
-    
+
 function closeAd() {
     const adPopup = document.getElementById('adPopup');
     adPopup.style.animation = 'slideOut 0.3s ease-in forwards';
