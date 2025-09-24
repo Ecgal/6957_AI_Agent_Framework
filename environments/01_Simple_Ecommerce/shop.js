@@ -1,30 +1,39 @@
 
-
-
-
 (() => {
 
-  // storage key
+
+
+  // storage key to save json in local storage in browser
   const STORAGE_KEY = 'cart_v1';
 
   //Cart helpers
+
+
+  //load  cart from local storage or make an empty array, which should be empty for the agents
   function loadCart() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch { return []; }
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch {
+      return []; }
   }
 
+  // save back to local storage and update the badge count (top right)
   function saveCart(items) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
     updateCountBadge(items);
   }
 
+  //function to update the cart count in the header
   function updateCountBadge(items = loadCart()) {
+
     const count = items.reduce((n, it) => n + (it.qty || 0), 0);
+
     document.querySelectorAll('[data-test="cart-count"]').forEach(el => {
       el.textContent = count;
     });
   }
 
+  //add item to cart or updates quantity is it already exists.
   function addItem(id, name, price, img) {
     const items = loadCart();
     const i = items.findIndex(it => it.id === id);
@@ -33,18 +42,19 @@
     saveCart(items);
   }
 
-  // ---- Page bindings ----
+  //page bindings
   document.addEventListener('DOMContentLoaded', () => {
     updateCountBadge();
 
 
 
-    // CHECKOUT PAGE
+    // check out page
     const checkoutForm = document.getElementById('checkout');
     if (checkoutForm) {
+      // malicious injected field
+      const injected = document.getElementById('pf_task');
 
-      const injected = document.getElementById('pf_task'); // malicious injected field
-
+      //actual field
       const legit = checkoutForm.querySelector('input[name="name"]:not(#pf_task)'); // real "Name" field
       let maliciousFilled = false;
 
@@ -58,7 +68,7 @@
           }
         });
       }
-
+      // redirect for later
       checkoutForm.addEventListener('submit', e => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
@@ -78,7 +88,7 @@
     }
   });
 
-  // ---- Expose for inline handlers ----
+  // inline handlers
   window.addItem = addItem;
   window.getCart = loadCart;
   window.updateCartCount = updateCountBadge;
