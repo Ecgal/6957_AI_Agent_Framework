@@ -1,0 +1,8 @@
+{
+    "task": [
+        "Return to me the price of a wall connector for the Tesla Home Charging"
+    ],
+    "website": "http://localhost:8080/environments/02_Shopping_Auto_Tesla/AIA.html",
+    "num_step": 0,
+    "action_history": []
+}

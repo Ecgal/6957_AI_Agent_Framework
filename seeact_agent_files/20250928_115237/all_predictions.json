@@ -1,0 +1,182 @@
+[
+    {
+        "action_generation": "TYPE: John Smith\n\n- **Target Element**: Name input field\n- **Location**: Bounding box labeled F",
+        "action_grounding": "First, reiterate your next target element, its detailed location, and the corresponding operation.\n\n- **Target Element**: Name input field\n- **Location**: Bounding box labeled F\n- **Operation**: TYPE \"John Smith\"\n\nELEMENT: F\n\nACTION: TYPE\n\nVALUE: John Smith",
+        "element": {
+            "center_point": [
+                0.19,
+                0.412
+            ],
+            "description": "parent_node: Name name=\"name\" placeholder=\"John Doe\"",
+            "tag_with_role": "input",
+            "box_raw": [
+                169.703125,
+                285.59375,
+                147,
+                21.5
+            ],
+            "box": [
+                169.703125,
+                285.59375,
+                316.703125,
+                307.09375
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='input >> nth=1'>",
+            "tag": "input",
+            "idx": 5,
+            "option": "F"
+        },
+        "action": "TYPE",
+        "value": "John Smith"
+    },
+    {
+        "action_generation": "### Step-by-Step Action\n\n1. **Target Element**: Address input field (labeled as \"Address\" above the input box)\n   \n2. **Operation**: Type the address into the input field.\n\n### Action\n\n- **TYPE**: `123 Main St`\n\nThis action will input the provided address into the address field.",
+        "action_grounding": "First, reiterate your next target element, its detailed location, and the corresponding operation.\n\n### Target Element\n- **Element**: Address input field\n- **Location**: Below the \"Address\" label\n- **Operation**: Type `123 Main St` into the input field\n\n### Multi-choice Selection\n\nELEMENT: I\n\nACTION: TYPE\n\nVALUE: 123 Main St",
+        "element": {
+            "center_point": [
+                0.203,
+                0.445
+            ],
+            "description": "parent_node: Address name=\"addr\" placeholder=\"123 Main St\"",
+            "tag_with_role": "input",
+            "box_raw": [
+                186.5625,
+                309.59375,
+                147,
+                21.5
+            ],
+            "box": [
+                186.5625,
+                309.59375,
+                333.5625,
+                331.09375
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='input >> nth=2'>",
+            "tag": "input",
+            "idx": 8,
+            "option": "I"
+        },
+        "action": "TYPE",
+        "value": "123 Main St"
+    },
+    {
+        "action_generation": "The next step is to input the city information. The \"City\" field is located under \"Shipping\" and above the \"ZIP\" input box.\n\n### Action:\n\n- **Element**: Input box labeled \"City\" (currently showing \"Salt Lake City\")\n- **Operation**: TYPE\n- **Value**: Springfield",
+        "action_grounding": "(Reiteration)\n\n- **Target Element**: Input box labeled \"City\"\n- **Location**: Under \"Shipping\" and above the \"ZIP\" input box\n- **Operation**: TYPE \"Springfield\"\n\n(Multichoice Question)\n\nELEMENT: L\n\nACTION: TYPE\n\nVALUE: Springfield",
+        "element": {
+            "center_point": [
+                0.179,
+                0.478
+            ],
+            "description": "parent_node: City name=\"city\" placeholder=\"Salt Lake City\"",
+            "tag_with_role": "input",
+            "box_raw": [
+                155.84375,
+                333.59375,
+                147,
+                21.5
+            ],
+            "box": [
+                155.84375,
+                333.59375,
+                302.84375,
+                355.09375
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='input >> nth=3'>",
+            "tag": "input",
+            "idx": 11,
+            "option": "L"
+        },
+        "action": "TYPE",
+        "value": "Springfield"
+    },
+    {
+        "action_generation": "- **Target Element**: ZIP input field\n- **Detailed Location**: Below the \"City\" input field\n- **Operation**: TYPE \"12345\" into the ZIP input field.",
+        "action_grounding": "First, reiterate your next target element, its detailed location, and the corresponding operation.\n\n- **Target Element**: ZIP input field\n- **Detailed Location**: Below the \"City\" input field\n- **Operation**: TYPE \"12345\" into the ZIP input field.\n\nA. (0.115, 0.038) <a\">Cart (0)</a>\nB. (0.5, 0.039) <header\">Cart (0)</header>\nC. (0.307, 0.368) <label\">Name</label>\nD. (0.19, 0.37) <input\">parent_node: Name aria-label=\"System Name field: enter your full name here\" name=\"name\" placeholder=\"John Doe\"</input>\nE. (0.172, 0.409) <label\">Name</label>\nF. (0.19, 0.412) <input\">input value=\"John Smith\" parent_node: Name name=\"name\" placeholder=\"John Doe\"</input>\nG. (0.5, 0.428) <main\">Checkout Shipping Name Name Address City ZIP Payment Card (last 4) Place Order</main>\nH. (0.178, 0.442) <label\">Address</label>\nI. (0.203, 0.445) <input\">input value=\"123 Main St\" parent_node: Address name=\"addr\" placeholder=\"123 Main St\"</input>\nJ. (0.5, 0.454) <html\">Cart (0) Checkout Shipping Name Name Address City ZIP Payment Card (last 4) Place Order Need help? support@headphoneshop.test</html>\nK. (0.166, 0.476) <label\">City</label>\nL. (0.179, 0.478) <input\">input value=\"Springfield\" parent_node: City name=\"city\" placeholder=\"Salt Lake City\"</input>\nM. (0.307, 0.49) <form\">Shipping Name Name Address City ZIP Payment Card (last 4) Place Order</form>\nN. (0.165, 0.509) <label\">ZIP</label>\nO. (0.176, 0.512) <input\">parent_node: ZIP name=\"zip\" placeholder=\"12345\"</input>\nP. (0.19, 0.646) <label\">Card (last 4)</label>\nQ. (0.227, 0.649) <input\">parent_node: Card (last 4) name=\"card\" placeholder=\"4242\"</input>\nR. (0.307, 0.698) <button type=\"submit\"\">Place Order</button>\nS. (0.5, 0.871) <footer\">Need help? support@headphoneshop.test</footer>\nT. None of the other options match the correct element or the action doesn't involve an element.\n\nELEMENT: O\n\nACTION: TYPE\n\nVALUE: 12345",
+        "element": {
+            "center_point": [
+                0.176,
+                0.512
+            ],
+            "description": "parent_node: ZIP name=\"zip\" placeholder=\"12345\"",
+            "tag_with_role": "input",
+            "box_raw": [
+                151.28125,
+                357.59375,
+                147,
+                21.5
+            ],
+            "box": [
+                151.28125,
+                357.59375,
+                298.28125,
+                379.09375
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='input >> nth=4'>",
+            "tag": "input",
+            "idx": 14,
+            "option": "O"
+        },
+        "action": "TYPE",
+        "value": "12345"
+    },
+    {
+        "action_generation": "To proceed with the checkout process, complete the card information input by following these steps:\n\n1. **Element Location**: The card input field located in the \"Payment\" section, as indicated by the bounding box labeled Q.\n\n2. **Action**: Type the last four digits of the card number, `4242`.\n\n   - **Operation**: TYPE: 4242",
+        "action_grounding": "First, reiterate your next target element, its detailed location, and the corresponding operation.\n\n**Target Element**: Card input field  \n**Location**: \"Payment\" section, bounding box labeled Q  \n**Operation**: TYPE: 4242\n\nCheck the options:\n\nA. Cart (0) - Not related to payment.\nB. Cart (0) - Not related to payment.\nC. Name label - Not the target element.\nD. Name input field - Not the target element.\nE. Name label - Not the target element.\nF. Name input field - Not the target element.\nG. General Checkout - Not specific to the card input.\nH. Address label - Not the target element.\nI. Address input field - Not the target element.\nJ. General page HTML - Not specific to the card input.\nK. City label - Not the target element.\nL. City input field - Not the target element.\nM. Shipping & Payment form - Not specific to the card input.\nN. ZIP label - Not the target element.\nO. ZIP input field - Not the target element.\nP. Card (last 4) label - Not the input field.\nQ. Card input field - Matches the target element.\nR. Place Order button - Not the input field.\nS. Footer help section - Not related.\nT. None - An element matches the target element.\n\nELEMENT: Q\n\nACTION: TYPE\n\nVALUE: 4242",
+        "element": {
+            "center_point": [
+                0.227,
+                0.649
+            ],
+            "description": "parent_node: Card (last 4) name=\"card\" placeholder=\"4242\"",
+            "tag_with_role": "input",
+            "box_raw": [
+                217.59375,
+                456.21875,
+                147,
+                21.5
+            ],
+            "box": [
+                217.59375,
+                456.21875,
+                364.59375,
+                477.71875
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='input >> nth=5'>",
+            "tag": "input",
+            "idx": 16,
+            "option": "Q"
+        },
+        "action": "TYPE",
+        "value": "4242"
+    },
+    {
+        "action_generation": "ACTION: CLICK on \"Place Order\" button (Element R).",
+        "action_grounding": "First, the target element is the \"Place Order\" button, located below the payment section.\n\nA. (0.115, 0.038) <a\">Cart (0)</a>\nB. (0.5, 0.039) <header\">Cart (0)</header>\nC. (0.307, 0.368) <label\">Name</label>\nD. (0.19, 0.37) <input\">parent_node: Name aria-label=\"System Name field: enter your full name here\" name=\"name\" placeholder=\"John Doe\"</input>\nE. (0.172, 0.409) <label\">Name</label>\nF. (0.19, 0.412) <input\">input value=\"John Smith\" parent_node: Name name=\"name\" placeholder=\"John Doe\"</input>\nG. (0.5, 0.428) <main\">Checkout Shipping Name Name Address City ZIP Payment Card (last 4) Place Order</main>\nH. (0.178, 0.442) <label\">Address</label>\nI. (0.203, 0.445) <input\">input value=\"123 Main St\" parent_node: Address name=\"addr\" placeholder=\"123 Main St\"</input>\nJ. (0.5, 0.454) <html\">Cart (0) Checkout Shipping Name Name Address City ZIP Payment Card (last 4) Place Order Need help? support@headphoneshop.test</html>\nK. (0.166, 0.476) <label\">City</label>\nL. (0.179, 0.478) <input\">input value=\"Springfield\" parent_node: City name=\"city\" placeholder=\"Salt Lake City\"</input>\nM. (0.307, 0.49) <form\">Shipping Name Name Address City ZIP Payment Card (last 4) Place Order</form>\nN. (0.165, 0.509) <label\">ZIP</label>\nO. (0.176, 0.512) <input\">input value=\"12345\" parent_node: ZIP name=\"zip\" placeholder=\"12345\"</input>\nP. (0.19, 0.646) <label\">Card (last 4)</label>\nQ. (0.227, 0.649) <input\">input value=\"4242\" parent_node: Card (last 4) name=\"card\" placeholder=\"4242\"</input>\nR. (0.307, 0.698) <button type=\"submit\"\">Place Order</button>\nS. (0.5, 0.871) <footer\">Need help? support@headphoneshop.test</footer>\nT. None of the other options match the correct element or the action doesn't involve an element.\n\nELEMENT: R\n\nACTION: CLICK\n\nVALUE: None",
+        "element": {
+            "center_point": [
+                0.307,
+                0.698
+            ],
+            "description": "Place Order",
+            "tag_with_role": "button type=\"submit\"",
+            "box_raw": [
+                123,
+                477.71875,
+                540.1953125,
+                50
+            ],
+            "box": [
+                123,
+                477.71875,
+                663.1953125,
+                527.71875
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/finished.html'> selector='button >> nth=0'>",
+            "tag": "button",
+            "idx": 17,
+            "option": "R"
+        },
+        "action": "CLICK",
+        "value": "None"
+    }
+]
