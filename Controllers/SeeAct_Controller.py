@@ -8,7 +8,7 @@ from utils import wait_for_metric
 
 # SeeAct agent controller
 load_dotenv()
-api_key = os.getenv("API_KEY")
+
 
 async def run_seeact(prompts_file="prompts.json"):
 
