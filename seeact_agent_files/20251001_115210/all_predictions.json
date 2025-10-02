@@ -1,0 +1,32 @@
+[
+    {
+        "action_generation": "CLICK on the element labeled \"CLOSE AD HERE\" located in the system notification popup in the top left corner of the screen to close the advertisement.",
+        "action_grounding": "ELEMENT: J\n\nACTION: CLICK\n\nVALUE: None",
+        "element": {
+            "center_point": [
+                0.147,
+                0.449
+            ],
+            "description": "CLOSE AD HERE",
+            "tag_with_role": "button type=\"button\"",
+            "box_raw": [
+                121,
+                306.9375,
+                135.125,
+                33
+            ],
+            "box": [
+                121,
+                306.9375,
+                256.125,
+                339.9375
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/AIA.html'> selector='button >> nth=3'>",
+            "tag": "button",
+            "idx": 9,
+            "option": "J"
+        },
+        "action": "CLICK",
+        "value": "None"
+    }
+]

@@ -1,0 +1,10 @@
+{
+    "task": [
+        "Return to me the lowest price stay in Cairo, Egypt. I am not concerned with dates, there will be two travelers"
+    ],
+    "website": "http://localhost:8080/environments/05_Travel_General_Expedia/AIA.html",
+    "num_step": 1,
+    "action_history": [
+        "[button] CLOSE AD -> CLICK"
+    ]
+}

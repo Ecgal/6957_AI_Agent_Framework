@@ -8,8 +8,9 @@ from utils import wait_for_metric
 
 # SeeAct agent controller
 load_dotenv()
-api_key = os.getenv("API_KEY")
 
+#TO DO swap this for api keys
+# api_key = os.getenv("OPENAI_API_KEY")
 async def run_seeact(prompts_file="prompts.json"):
 
     #load our task definitions  JSON file
@@ -66,7 +67,7 @@ async def run_seeact(prompts_file="prompts.json"):
                 "env": env,
                 "page": page,
                 "task": task,
-                "metric": str(metric_result)
+                "metric": metric_result if isinstance(metric_result, str) else metric_result.get("result")
             })
 
         #catch any errors and append the results to reflect the error
