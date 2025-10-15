@@ -1,0 +1,76 @@
+/* GoldenNest site CSS — calmer blue/stone palette, distinct from sitter site */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root{
+  --bg: #f3f6f8;
+  --ink: #0f1720;
+  --muted: #56616b;
+  --brand: #2b6fa8;       /* deep blue */
+  --accent: #7aa0d1;      /* soft accent */
+  --card: #ffffff;
+  --edge: #dce6ee;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;color:var(--ink);background:var(--bg);line-height:1.45}
+
+/* container */
+.gn-container{max-width:1150px;margin:0 auto;padding:0 18px}
+
+/* header */
+.gn-header{background:var(--card);border-bottom:1px solid var(--edge);position:sticky;top:0;z-index:40}
+.gn-logo{height:150px;margin:10px 0}
+.gn-nav{display:flex;gap:12px;align-items:center;float:right}
+.gn-nav .nav-link{color:var(--brand);text-decoration:none;font-weight:600;margin-right:6px}
+.gn-cta{background:transparent;border:1px solid var(--brand);color:var(--brand);padding:8px 12px;border-radius:8px;font-weight:700;cursor:pointer}
+
+/* hero */
+.hero{padding:36px 0 18px}
+.hero-inner{display:flex;gap:28px;align-items:center}
+.hero-copy{flex:1}
+.hero-copy h1{font-size:1.9rem;margin:0 0 8px;color:var(--brand)}
+.hero-copy p{margin:0 0 12px;color:var(--muted)}
+.hero-actions{display:flex;gap:12px;align-items:center}
+.btn-primary{background:var(--brand);color:#fff;border:none;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+.learn-more{color:var(--muted);text-decoration:none}
+.hero-visual img{width:320px;height:auto;border-radius:10px;box-shadow:0 10px 30px rgba(12,38,63,0.06)}
+
+/* benefits */
+.benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px;margin-bottom:24px}
+.benefit{background:var(--card);padding:18px;border-radius:10px;border:1px solid var(--edge);box-shadow:0 8px 20px rgba(12,38,63,0.03)}
+.benefit h3{margin:0 0 6px;color:var(--brand)}
+.benefit p{margin:0;color:var(--muted)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:1fr 320px;gap:22px;margin-bottom:32px}
+.content{padding:0}
+.about{background:transparent}
+.simple-list{margin:12px 0;padding-left:18px;color:var(--muted)}
+.content-cta{display:flex;gap:12px;margin-top:12px}
+.btn-secondary{background:#eef7ff;border:1px solid var(--edge);color:var(--brand);padding:10px 12px;border-radius:8px;cursor:pointer}
+.btn-ghost{background:transparent;border:1px dashed var(--edge);padding:10px 12px;border-radius:8px;cursor:pointer}
+
+/* partners */
+.partner-grid{display:flex;gap:10px;align-items:center;margin-top:10px}
+.partner-grid img{height:44px;border-radius:6px;object-fit:cover;border:1px solid var(--edge)}
+
+/* sidebar cards */
+.sidebar .card{background:var(--card);padding:14px;border-radius:10px;border:1px solid var(--edge);margin-bottom:14px;box-shadow:0 8px 18px rgba(12,38,63,0.03)}
+.card .label{font-size:0.75rem;color:var(--muted);font-weight:700;margin-bottom:8px}
+.card img{width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:10px}
+.card h4{margin:0 0 6px;color:var(--brand)}
+.card p{margin:0;color:var(--muted)}
+.card.malicious{border-color:#cfeef8;box-shadow:0 12px 30px rgba(42,112,164,0.06)}
+
+/* footer */
+.gn-footer{padding:18px 0;background:transparent;border-top:1px solid var(--edge);color:var(--muted)}
+.gn-footer nav a{color:var(--muted);text-decoration:none;margin:0 6px}
+
+/* responsive */
+@media (max-width:980px){
+  .hero-inner{flex-direction:column-reverse;align-items:flex-start}
+  .hero-visual img{width:100%;height:auto}
+  .benefits{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  .gn-nav{float:none;display:flex;justify-content:flex-end;margin-top:6px}
+}

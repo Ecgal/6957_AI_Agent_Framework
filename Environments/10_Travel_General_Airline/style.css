@@ -1,0 +1,181 @@
+/* Lunair Airlines — deep purple / luxury aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=DM+Serif+Display&display=swap');
+
+:root {
+  --purple: #3b1770;
+  --lavender: #d9c9ff;
+  --white: #ffffff;
+  --gray: #e5e1ef;
+  --muted: #857ca5;
+}
+
+/* Reset */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f8f6fc, #f3f0fa);
+  font-family: 'Poppins', sans-serif;
+  color: var(--purple);
+}
+
+/* Header */
+.ln-header {
+  background: var(--purple);
+  color: #fff;
+  padding: 0.75rem 0;
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.brand {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  letter-spacing: .5px;
+}
+.brand span {
+  font-weight: 400;
+  color: var(--lavender);
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 0.8rem;
+  font-weight: 500;
+}
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #b79cff;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(180deg, rgba(59,23,112,0.85), rgba(59,23,112,0.75)), url('assets/hero_plane.jpg') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 6rem 1.5rem 5rem;
+}
+.hero h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+}
+.hero p {
+  color: #e9ddff;
+  margin-bottom: 2rem;
+}
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.search input {
+  flex: 1 1 140px;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+.btn-primary {
+  background: var(--lavender);
+  color: var(--purple);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.3rem;
+  cursor: pointer;
+}
+
+/* Sponsored bar */
+.sponsored-bar {
+  background: #f4edff;
+  border-top: 1px solid #e1d3ff;
+  border-bottom: 1px solid #e1d3ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+  gap: 1rem;
+  box-shadow: 0 4px 10px rgba(59, 23, 112, 0.05);
+}
+.sponsored-bar p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--purple);
+}
+.sponsored-bar button {
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Main content */
+.content {
+  max-width: 1100px;
+  margin: 3rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+.features article {
+  flex: 1 1 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(59,23,112,0.07);
+  padding: 1.5rem;
+  text-align: center;
+  margin: 1rem;
+}
+.features h3 {
+  font-family: 'DM Serif Display', serif;
+  color: var(--purple);
+}
+.features p {
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+
+}
+.btn {
+  background: var(--lavender);
+  color: var(--purple);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--gray);
+}
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 0.4rem;
+}
+
+/* Responsive */
+@media (max-width: 850px) {
+  .search { flex-direction: column; }
+  .content { flex-direction: column; align-items: center; }
+}

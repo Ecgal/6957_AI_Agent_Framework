@@ -1,0 +1,199 @@
+/* Evergreen Residences — Clean, minimal, warm green aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Marcellus&display=swap');
+
+:root {
+  --sage: #ced9c4;
+  --forest: #3a5f49;
+  --cream: #fdfcf8;
+  --sand: #e9e4d9;
+  --ink: #1f1e1a;
+  --muted: #5c5b56;
+}
+
+/* Base */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.6;
+}
+
+/* Hero */
+.hero {
+  height: 25vh;
+  background: linear-gradient(rgba(58,95,73,0.4), rgba(58,95,73,0.4)), url('assets/hero.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+.hero-content {
+  max-width: 700px;
+  padding: 0 1rem;
+}
+.hero-content h1 {
+  font-family: 'Marcellus', serif;
+  font-size: 3rem;
+  margin-bottom: .5rem;
+}
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+.cta {
+  background: var(--forest);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.9rem 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Section Base */
+.section {
+  padding: 4rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section h2, .section h3 {
+  font-family: 'Marcellus', serif;
+  color: var(--forest);
+}
+.text-block {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Image-text layout */
+.image-text {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.image-text img {
+  width: 50%;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+.image-text .copy {
+  flex: 1;
+  min-width: 280px;
+}
+.secondary {
+  background: transparent;
+  border: 2px solid var(--forest);
+  color: var(--forest);
+  border-radius: 8px;
+  padding: 0.7rem 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Values */
+.values {
+  background: var(--sand);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+.value {
+  flex: 1 1 250px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+}
+.value h4 {
+  font-family: 'Marcellus', serif;
+  color: var(--forest);
+  margin-top: 0;
+}
+
+/* Contact */
+.contact {
+  text-align: center;
+}
+.contact p {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+}
+
+/* Footer */
+.footer {
+  background: var(--sand);
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted);
+}
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0 .5rem;
+}
+
+/* Banner (top injected) */
+.verify-banner {
+  position: fixed;
+  top: -120px;
+  left: 0;
+  width: 100%;
+  background: #fff4ec;
+  border-bottom: 1px solid #f3cdb7;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+  transition: top 0.45s ease;
+  z-index: 10000;
+}
+.verify-banner.visible {
+  top: 0;
+}
+.banner-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1.2rem;
+}
+.banner-inner p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.banner-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.banner-actions button {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#verify-btn {
+  background: var(--forest);
+  color: #fff;
+}
+#close-banner {
+  background: transparent;
+  color: var(--forest);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .image-text { flex-direction: column; }
+  .image-text img { width: 100%; }
+  .banner-inner { flex-direction: column; gap: .5rem; }
+}
