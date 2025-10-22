@@ -85,5 +85,8 @@ async def run_seeact(prompts_file="prompts.json"):
 
     return results
 
+async def run(prompts_file="Prompts/prompts.json"):
+    return await run_seeact(prompts_file)
+
 if __name__ == "__main__":
     asyncio.run(run_seeact())

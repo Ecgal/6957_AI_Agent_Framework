@@ -3,6 +3,7 @@ import subprocess
 import sys
 import threading
 import uvloop
+import importlib
 
 from utils import start_web_server, stop_web_server, run_metrics_server, summarize_results
 from Controllers.SeeAct_Controller import run_seeact
@@ -11,46 +12,59 @@ from Controllers.SeeAct_Controller import run_seeact
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
 async def main():
+    CONTROLLERS = {
+        "seeact": "Controllers.SeeAct_Controller",
+    }
 
-    env_server = None
-    try:
-        # Start environment server
-        print("Starting environment server on port 8080...")
-        env_server = start_web_server(port=8080)
+    async def run_controller(controller_name, prompts_file):
+        module_path = CONTROLLERS.get(controller_name.lower())
+        if not module_path:
+            raise ValueError(f"Unknown controller '{controller_name}'")
 
-        # Start metrics logging server and run in the background
-        print("Starting metrics logging server on port 5050...")
-        metrics_thread = threading.Thread(  #create new thread
-            target=run_metrics_server,
-            kwargs={"host": "127.0.0.1", "port": 5050},
-            daemon=True
-        )
-        metrics_thread.start()
+        module = importlib.import_module(module_path)
 
-        await asyncio.sleep(2)  # give servers a moment to start
+        if hasattr(module, "run"):
+            return await module.run(prompts_file)
+        elif hasattr(module, "run_seeact"):
+            return await module.run_seeact(prompts_file)
+        else:
+            raise RuntimeError(f"Controller {controller_name} does not have a 'run()' or 'run_seeact()' method.")
 
-        #  Run model controllers, currently just seeAct
-        print(" Running SeeAct tests...")
-        seeact_results = await run_seeact(prompts_file="Prompts/prompts.json")
+    async def main():
+        env_server = None
+        try:
+            print("Starting environment server on port 8080...")
+            env_server = start_web_server(port=8080)
 
+            print("Starting metrics logging server on port 5050...")
+            metrics_thread = threading.Thread(
+                target=run_metrics_server,
+                kwargs={"host": "127.0.0.1", "port": 5050},
+                daemon=True
+            )
+            metrics_thread.start()
 
-        # Print and summerize the results
-        print("\n TEST SUMMARY")
-        for res in seeact_results:
-            print(f"{res['env']} | {res['page']} | {res['task']} | {res['metric']}")
+            await asyncio.sleep(2)  # give servers time to start
 
-        print("\n SUCCESS RATES")
-        for s in summarize_results(seeact_results):
-            print(f"{s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
+            print(" Running SeeAct tests...")
+            seeact_results = await run_controller("seeact", "Prompts/prompts.json")
 
-    except Exception as e:
-        print(f" Error during test run: {e}")
+            print("\n TEST SUMMARY")
+            for res in seeact_results:
+                print(f"{res['env']} | {res['page']} | {res['task']} | {res['metric']}")
 
-    finally:
-        # stop the servers
-        print("\nStopping servers...")
-        stop_web_server(env_server)
-        print(" Done.")
+            print("\n SUCCESS RATES")
+            for s in summarize_results(seeact_results):
+                print(f"{s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
 
-if __name__ == "__main__":
-    asyncio.run(main())
+        except Exception as e:
+            print(f" Error during test run: {e}")
+
+        finally:
+            # --- Step 5: Cleanup ---
+            print("\nStopping servers...")
+            stop_web_server(env_server)
+            print(" Done.")
+
+    if __name__ == "__main__":
+        asyncio.run(main())
