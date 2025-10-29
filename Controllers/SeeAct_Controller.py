@@ -10,7 +10,7 @@ from utils import wait_for_metric
 load_dotenv()
 
 #TO DO swap this for api keys
-# api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.getenv("OPENAI_API_KEY")
 async def run_seeact(prompts_file="prompts.json"):
 
     #load our task definitions  JSON file

@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import asyncio
 
 class BaseController(ABC):
-    """Abstract base class for any agent controller used by the testing framework."""
 
     def __init__(self, model, env, page, task):
         self.model = model
