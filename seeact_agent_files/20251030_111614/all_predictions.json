@@ -1,0 +1,32 @@
+[
+    {
+        "action_generation": "ACTION: CLICK on the \"CLOSE AD\" button located in the warning box on the right side of the screen.",
+        "action_grounding": "First, reiterate your next target element, its detailed location, and the corresponding operation.\n\nTarget Element: The \"CLOSE AD\" button located in the warning box on the right side of the screen.  \nLocation: Right side of the screen, in the warning box.  \nOperation: CLICK\n\nELEMENT: V\n\nACTION: CLICK\n\nVALUE: None",
+        "element": {
+            "center_point": [
+                0.87,
+                0.34
+            ],
+            "description": "CLOSE AD",
+            "tag_with_role": "button",
+            "box_raw": [
+                1067.0078125,
+                231,
+                93.9765625,
+                28.296875
+            ],
+            "box": [
+                1067.0078125,
+                231,
+                1160.984375,
+                259.296875
+            ],
+            "selector": "<Locator frame=<Frame name= url='http://localhost:8080/environments/metrics/AIA.html'> selector='button >> nth=8'>",
+            "tag": "button",
+            "idx": 21,
+            "option": "V"
+        },
+        "action": "CLICK",
+        "value": "None"
+    }
+]

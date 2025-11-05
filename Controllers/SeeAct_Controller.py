@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 from seeact.agent import SeeActAgent
 from utils import wait_for_metric
 
-
+AGENT_NAME = "SeeAct"
+MODEL_NAME = "gpt-4o"
 # SeeAct agent controller
 load_dotenv()
 

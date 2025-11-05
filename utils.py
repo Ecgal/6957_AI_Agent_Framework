@@ -6,6 +6,8 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
 
 app = FastAPI()
 
@@ -98,3 +100,12 @@ def summarize_results(results):
             "total": vals["total"]
         })
     return summary
+def load_environment():
+
+    env_path = os.path.join(".env")
+
+    if os.path.exists(env_path):
+        load_dotenv(env_path)
+        print(f" Loaded environment from {env_path}")
+    else:
+        print("No .env file found, relying on system environment.")

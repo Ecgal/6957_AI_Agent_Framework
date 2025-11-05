@@ -1,23 +1,44 @@
+import os
 import asyncio
 import threading
 import importlib
+import inspect
 import uvloop
 
+import sys, os
 from logger import log_summary_to_json
 from utils import start_web_server, stop_web_server, run_metrics_server, summarize_results
 
-# use uvloop for async
+sys.path.append(os.path.dirname(__file__))
+sys.path.append(os.path.join(os.path.dirname(__file__), "LiteWebAgent"))
+
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 
-async def run_controller(controller_name, prompts_file):
-    CONTROLLERS = {
-        "seeact": "Controllers.SeeAct_Controller",
-    }
 
-    module_path = CONTROLLERS.get(controller_name.lower())
-    if not module_path:
-        raise ValueError(f"Unknown controller '{controller_name}'")
+async def discover_controllers():
+    controllers_dir = os.path.join(os.path.dirname(__file__), "Controllers")
+    controllers = []
 
+    for filename in os.listdir(controllers_dir):
+        if not filename.endswith(".py") or filename == "BaseController.py":
+            continue
+
+        controller_name = filename.replace(".py", "")
+        module_path = f"Controllers.{controller_name}"
+        module = importlib.import_module(module_path)
+
+        agent_name = getattr(module, "AGENT_NAME", controller_name)
+        model_name = getattr(module, "MODEL_NAME", "unknown")
+
+        if hasattr(module, "run") and inspect.iscoroutinefunction(module.run):
+            controllers.append((controller_name, module_path, agent_name, model_name))
+        elif hasattr(module, "run_seeact") and inspect.iscoroutinefunction(module.run_seeact):
+            controllers.append((controller_name, module_path, agent_name, model_name))
+
+    return controllers
+
+
+async def run_controller(controller_name, module_path, prompts_file):
     module = importlib.import_module(module_path)
 
     if hasattr(module, "run"):
@@ -25,15 +46,19 @@ async def run_controller(controller_name, prompts_file):
     elif hasattr(module, "run_seeact"):
         return await module.run_seeact(prompts_file)
     else:
-        raise RuntimeError(f"Controller {controller_name} does not have a 'run()' or 'run_seeact()' method.")
+        print(f" {controller_name} has no run() or run_seeact() method.")
+        return []
+
 
 async def main():
     env_server = None
+    all_results = []
+
     try:
         print("Starting environment server on port 8080...")
         env_server = start_web_server(port=8080)
 
-        print("Starting metrics logging server on port 5050...")
+        print(" Starting metrics logging server on port 5050...")
         metrics_thread = threading.Thread(
             target=run_metrics_server,
             kwargs={"host": "127.0.0.1", "port": 5050},
@@ -41,35 +66,48 @@ async def main():
         )
         metrics_thread.start()
 
-        await asyncio.sleep(2)  # give servers time to start
+        await asyncio.sleep(2)
 
-        print(" Running SeeAct tests...")
-        seeact_results = await run_controller("seeact", "Prompts/prompts.json")
+        print("Discovering controllers...")
+        controllers = await discover_controllers()
 
-        print("\n TEST SUMMARY")
-        for res in seeact_results:
-            print(f"{res['env']} | {res['page']} | {res['task']} | {res['metric']}")
+        if not controllers:
+            print("No valid controllers found in /Controllers.")
+            return
 
-        summary = summarize_results(seeact_results)
+        for controller_name, module_path, agent_name, model_name in controllers:
+            print(f"\n Running {agent_name} ({controller_name}) using {model_name}...")
+            results = await run_controller(controller_name, module_path, "Prompts/prompts.json")
 
-        print("\n SUCCESS RATES")
-        for s in summary:
+            # Append all results for summary
+            all_results.extend(results)
+
+            print(f"\n Completed {agent_name}")
+            for res in results:
+                print(f"{res['env']} | {res['page']} | {res['task']} | {res['metric']}")
+
+            summary = summarize_results(results)
+            log_summary_to_json(
+                summary=summary,
+                results=results,
+                agent_name=agent_name,
+                model_name=model_name
+            )
+
+        print("\n---ALL CONTROLLERS COMPLETE---")
+        final_summary = summarize_results(all_results)
+        for s in final_summary:
             print(f"{s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
-
-        log_summary_to_json(
-            summary=summary,
-            results=seeact_results,
-            agent_name="SeeAct",
-            model_name="gpt-4o"
-        )
 
     except Exception as e:
         print(f" Error during test run: {e}")
 
     finally:
-        print("\nStopping servers...")
+        print("\n Stopping servers...")
         stop_web_server(env_server)
         print(" Done.")
 
+
 if __name__ == "__main__":
     asyncio.run(main())
+

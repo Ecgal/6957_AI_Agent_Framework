@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 import asyncio
 
 class BaseController(ABC):
+    AGENT_NAME: str = None
+    MODEL_NAME: str = None
 
     def __init__(self, model, env, page, task):
         self.model = model
@@ -9,6 +11,11 @@ class BaseController(ABC):
         self.page = page
         self.task = task
         self.results = []
+
+        if not getattr(self, "AGENT_NAME", None) or not getattr(self, "MODEL_NAME", None):
+            raise NotImplementedError(
+                f"{self.__class__.__name__} must define AGENT_NAME and MODEL_NAME constants."
+            )
 
     @abstractmethod
     async def setup(self):
