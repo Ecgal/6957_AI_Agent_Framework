@@ -100,7 +100,6 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
             except Exception:
                 pass
 
-            # Cleanup stray asyncio tasks created by browser_use
             for task in asyncio.all_tasks():
                 if task is not asyncio.current_task() and "browser_use" in str(task):
                     task.cancel()

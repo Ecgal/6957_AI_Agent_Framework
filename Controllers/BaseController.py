@@ -25,6 +25,10 @@ class BaseController(ABC):
     async def run(self):
         pass
 
+    @abstractmethod
+    async def teardown(self):
+        pass
+
     async def record(self, metric):
         metric_val = metric.get("result") if isinstance(metric, dict) else metric
         self.results.append({
@@ -39,4 +43,6 @@ class BaseController(ABC):
     async def execute(self):
         await self.setup()
         metric = await self.run()
-        return await self.record(metric)
+        results = await self.record(metric)
+        await self.teardown()
+        return results
