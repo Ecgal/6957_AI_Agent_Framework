@@ -27,7 +27,7 @@ class LiteWebAgentController(BaseController):
 
     async def run(self):
         try:
-            #  Create an isolated runner 
+            #  Create an isolated runner
             runner_code = textwrap.dedent(
                 r"""
                 import os, sys, json, asyncio, datetime, traceback
