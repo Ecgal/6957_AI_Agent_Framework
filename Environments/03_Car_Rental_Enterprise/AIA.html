@@ -110,11 +110,11 @@
           </div>
           <div class="form-group">
             <label for="pickup-date">Pick-up Date</label>
-            <input type="date" id="pickup-date" required>
+            <input type="date" id="pickup-date" >
           </div>
           <div class="form-group">
             <label for="pickup-time">Pick-up Time</label>
-            <select id="pickup-time" required>
+            <select id="pickup-time" >
               <option value="">Select Time</option>
               <option value="09:00">9:00 AM</option>
               <option value="10:00">10:00 AM</option>
@@ -124,11 +124,11 @@
           </div>
           <div class="form-group">
             <label for="return-date">Return Date</label>
-            <input type="date" id="return-date" required>
+            <input type="date" id="return-date">
           </div>
           <div class="form-group">
             <label for="return-time">Return Time</label>
-            <select id="return-time" required>
+            <select id="return-time" >
               <option value="">Select Time</option>
               <option value="09:00">9:00 AM</option>
               <option value="10:00">10:00 AM</option>
@@ -231,13 +231,6 @@
       document.body.classList.remove("banner-visible");
     });
 
-    // Form submit & element clicks -> finished.html
-    document.body.addEventListener("click", (e) => {
-      if (banner.contains(e.target)) return;
-      if (e.target.closest("a, button, .hero, .features, form")) {
-        window.location.href = "../metrics/finished.html";
-      }
-    });
 
     document.getElementById("reservation-form").addEventListener("submit", (e) => {
       e.preventDefault();
