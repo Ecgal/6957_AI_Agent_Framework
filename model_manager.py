@@ -19,15 +19,12 @@ class ModelManager:
 
     _instance = None
 
-    def __init__(self, model_type: str = "gpt", model_path: str = "MiniCPM-o-2_6",
-                 ranker_path: str = None, seed: int = 17):
+    def __init__(self, model_type: str = "gpt", seed: int = 17):
         """
         Private constructor. Use ModelManager.get() to retrieve the shared instance.
 
         Args:
             model_type: "minicpm" or "gpt"
-            model_path: Path to main model (only used if model_type == "minicpm")
-            ranker_path: Path to ranking model (for SeeAct, lazy loaded)
             seed: Random seed for reproducibility
         """
         self.model_type = model_type.lower()
@@ -38,14 +35,13 @@ class ModelManager:
         self.tokenizer = None
         self.processor = None
         self.api_key = None
+        self.model_path = None
 
         # Ranking model attributes (lazy loaded)
-        self.ranker_path = ranker_path
         self.ranking_model = None
 
         if self.model_type == "minicpm":
             self._initialize_seed(seed)
-            self.model_path = self._resolve(model_path)
             self._load_minicpm()
         elif self.model_type == "gpt":
             self._load_gpt()
@@ -53,34 +49,44 @@ class ModelManager:
             raise ValueError(f"Unsupported model_type: {model_type}. Use 'minicpm' or 'gpt'.")
 
     @classmethod
-    def get(cls, model_type: str = "gpt", model_path: str = "MiniCPM-o-2_6",
-            ranker_path: str = None, seed: int = 17):
+    def get(cls, model_type: str = "gpt", seed: int = 17):
         """
         Retrieve the global singleton instance.
+
+        Args:
+            model_type: "minicpm" or "gpt"
+            seed: Random seed for reproducibility
+
+        Note:
+            This method only accepts parameters on first call (when creating singleton).
+            Subsequent calls return the existing instance and ignore new parameters.
         """
         if cls._instance is None:
-            cls._instance = cls(model_type, model_path, ranker_path, seed)
+            cls._instance = cls(model_type, seed)
         return cls._instance
 
     @classmethod
-    def switch_model(cls, model_type: str, model_path: str = "MiniCPM-o-2_6",
-                     ranker_path: str = None, seed: int = 17):
+    def switch_model(cls, model_type: str, seed: int = 17):
         """
         Switch to a different model by reinitializing the singleton.
         Interface for future dashboard integration.
+
+        Args:
+            model_type: "minicpm" or "gpt"
+            seed: Random seed for reproducibility
         """
         cls._instance = None
-        return cls.get(model_type, model_path, ranker_path, seed)
+        return cls.get(model_type, seed)
 
     # --------------------------
     # Ranking model management
     # --------------------------
-    def get_ranking_model(self, ranker_path: str = None):
+    def get_ranking_model(self, ranker_path: str):
         """
         Get or lazy-load the ranking model (used by SeeAct).
 
         Args:
-            ranker_path: Path to the ranking model
+            ranker_path: Path to the ranking model (required)
 
         Returns:
             Loaded ranking model instance
@@ -88,16 +94,7 @@ class ModelManager:
         if self.ranking_model is not None:
             return self.ranking_model
 
-        # Use provided path or stored path
-        path = ranker_path or self.ranker_path
-        if path is None:
-            raise ValueError("ranker_path must be provided for ranking model")
-
-        # Update stored path if new one is provided
-        if ranker_path:
-            self.ranker_path = ranker_path
-
-        print(f"📚 Loading ranking model from {path}")
+        print(f"📚 Loading ranking model from {ranker_path}")
 
         try:
             # Import here to avoid issues if ranking_model module doesn't exist
@@ -112,7 +109,7 @@ class ModelManager:
 
             device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
             self.ranking_model = CrossEncoder(
-                path,
+                ranker_path,
                 device=device,
                 num_labels=1,
                 max_length=512
@@ -161,19 +158,14 @@ class ModelManager:
         # PyTorch deterministic ops
         torch.use_deterministic_algorithms(True, warn_only=True)
 
-    def _resolve(self, path: str) -> str:
-        """
-        Resolve the model path if it is relative.
-        """
-        if os.path.isabs(path):
-            return path
-        base = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(base, path)
-
     def _load_minicpm(self):
         """
         Load the MiniCPM model, tokenizer, and processor into memory.
+        Model path is hardcoded here.
         """
+        # Hardcoded path for MiniCPM model
+        self.model_path = "/uufs/chpc.utah.edu/common/home/u1533682/model/MiniCPM-o-2_6"
+
         print(f"📦 Loading MiniCPM model from {self.model_path}")
 
         self.model = AutoModel.from_pretrained(
