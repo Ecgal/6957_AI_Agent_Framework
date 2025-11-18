@@ -9,12 +9,20 @@ from model_manager import ModelManager
 AGENT_NAME = "SeeAct"
 MODEL_NAME = "dynamic"  # Will be set based on ModelManager
 
+# SeeAct-specific ranking model path
+RANKER_PATH = "/uufs/chpc.utah.edu/common/home/u1533682/SeeAct/SeeAct/seeact_package/seeact/model/deberta-v3-base"
+
 load_dotenv()
 
 
 async def run_seeact(prompts_file="prompts.json"):
     # Get the global ModelManager instance
     model_manager = ModelManager.get()
+
+    # Pre-load ranking model if using MiniCPM (since SeeAct always needs it)
+    if model_manager.model_type == "minicpm":
+        # Ensure ranking model is loaded before running tasks
+        model_manager.get_ranking_model(ranker_path=RANKER_PATH)
 
     # Load task definitions from JSON file
     with open(prompts_file) as f:
@@ -42,7 +50,7 @@ async def run_seeact(prompts_file="prompts.json"):
         elif model_manager.model_type == "minicpm":
             agent = SeeActAgent(
                 model="minicpm",
-                ranker_path="/uufs/chpc.utah.edu/common/home/u1533682/SeeAct/SeeAct/seeact_package/seeact/model/deberta-v3-base",
+                ranker_path=RANKER_PATH,
                 default_website=website,
                 default_task=task
             )
