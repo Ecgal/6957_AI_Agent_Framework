@@ -1,18 +1,25 @@
 import os
+import sys
 import asyncio
 import threading
 import importlib
 import inspect
 import uvloop
 
-import sys, os
 from logger import log_summary_to_json
 from utils import start_web_server, stop_web_server, run_metrics_server, summarize_results
+from model_manager import ModelManager
 
 sys.path.append(os.path.dirname(__file__))
 sys.path.append(os.path.join(os.path.dirname(__file__), "LiteWebAgent"))
 
 asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
+# Use GPT-4o
+# python Testing_Controller.py gpt
+
+# Use MiniCPM local model
+# python Testing_Controller.py minicpm
 
 
 async def discover_controllers():
@@ -46,19 +53,31 @@ async def run_controller(controller_name, module_path, prompts_file):
     elif hasattr(module, "run_seeact"):
         return await module.run_seeact(prompts_file)
     else:
-        print(f" {controller_name} has no run() or run_seeact() method.")
+        print(f"❌ {controller_name} has no run() or run_seeact() method.")
         return []
 
 
 async def main():
+    # Parse command line arguments for model type
+    model_type = sys.argv[1] if len(sys.argv) > 1 else "gpt"
+
+    # Initialize ModelManager singleton before starting tests
+    print(f"\n🔧 Initializing ModelManager with model_type: {model_type}")
+    try:
+        model_manager = ModelManager.get(model_type=model_type)
+        print(f"✅ ModelManager initialized successfully")
+    except Exception as e:
+        print(f"❌ Failed to initialize ModelManager: {e}")
+        return
+
     env_server = None
     all_results = []
 
     try:
-        print("Starting environment server on port 8080...")
+        print("\n🌐 Starting environment server on port 8080...")
         env_server = start_web_server(port=8080)
 
-        print(" Starting metrics logging server on port 5050...")
+        print("📊 Starting metrics logging server on port 5050...")
         metrics_thread = threading.Thread(
             target=run_metrics_server,
             kwargs={"host": "127.0.0.1", "port": 5050},
@@ -68,46 +87,45 @@ async def main():
 
         await asyncio.sleep(2)
 
-        print("Discovering controllers...")
+        print("\n🔍 Discovering controllers...")
         controllers = await discover_controllers()
 
         if not controllers:
-            print("No valid controllers found in /Controllers.")
+            print("❌ No valid controllers found in /Controllers.")
             return
 
         for controller_name, module_path, agent_name, model_name in controllers:
-            print(f"\n Running {agent_name} ({controller_name}) using {model_name}...")
+            print(f"\n🚀 Running {agent_name} ({controller_name}) using {model_type}...")
             results = await run_controller(controller_name, module_path, "Prompts/prompts.json")
 
             # Append all results for summary
             all_results.extend(results)
 
-            print(f"\n Completed {agent_name}")
+            print(f"\n✅ Completed {agent_name}")
             for res in results:
-                print(f"{res['env']} | {res['page']} | {res['task']} | {res['metric']}")
+                print(f"  {res['env']} | {res['page']} | {res['task']} | {res['metric']}")
 
             summary = summarize_results(results)
             log_summary_to_json(
                 summary=summary,
                 results=results,
                 agent_name=agent_name,
-                model_name=model_name
+                model_name=model_type  # Log actual model type used
             )
 
         print("\n---ALL CONTROLLERS COMPLETE---")
         final_summary = summarize_results(all_results)
         for s in final_summary:
-            print(f"{s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
+            print(f"  {s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
 
     except Exception as e:
-        print(f" Error during test run: {e}")
+        print(f"❌ Error during test run: {e}")
 
     finally:
-        print("\n Stopping servers...")
+        print("\n🛑 Stopping servers...")
         stop_web_server(env_server)
-        print(" Done.")
+        print("✅ Done.")
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
