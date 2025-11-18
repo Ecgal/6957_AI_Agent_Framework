@@ -10,7 +10,7 @@ AGENT_NAME = "SeeAct"
 MODEL_NAME = "dynamic"  # Will be set based on ModelManager
 
 # SeeAct-specific ranking model path
-RANKER_PATH = "/uufs/chpc.utah.edu/common/home/u1533682/SeeAct/SeeAct/seeact_package/seeact/model/deberta-v3-base"
+RANKER_PATH = "/uufs/chpc.utah.edu/common/home/u1533682/model/deberta-v3-base"
 
 load_dotenv()
 
