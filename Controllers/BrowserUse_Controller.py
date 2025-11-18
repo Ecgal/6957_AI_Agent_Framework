@@ -2,7 +2,7 @@ import os
 import json
 import asyncio
 from dotenv import load_dotenv
-from browser_use import Agent, Browser, ChatOpenAI
+from browser_use import Agent, Browser, ChatOpenAI, ChatMiniCPM
 from utils import wait_for_metric
 from model_manager import ModelManager
 
@@ -10,7 +10,6 @@ AGENT_NAME = "BrowserUse"
 MODEL_NAME = "dynamic"  # Will be set based on ModelManager
 
 load_dotenv()
-
 
 async def run_browseruse(prompts_file="Prompts/prompts.json"):
     # Get the global ModelManager instance
@@ -46,7 +45,6 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
                 agent = Agent(task=full_task, llm=llm, browser=browser)
 
             elif model_manager.model_type == "minicpm":
-                from browser_use import ChatMiniCPM  # Your custom LLM wrapper
                 llm = ChatMiniCPM()
                 agent = Agent(
                     task=full_task,
