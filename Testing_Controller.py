@@ -53,7 +53,7 @@ async def run_controller(controller_name, module_path, prompts_file):
     elif hasattr(module, "run_seeact"):
         return await module.run_seeact(prompts_file)
     else:
-        print(f"❌ {controller_name} has no run() or run_seeact() method.")
+        print(f" {controller_name} has no run() or run_seeact() method.")
         return []
 
 
@@ -65,19 +65,19 @@ async def main():
     print(f"\n🔧 Initializing ModelManager with model_type: {model_type}")
     try:
         model_manager = ModelManager.get(model_type=model_type)
-        print(f"✅ ModelManager initialized successfully")
+        print(f" ModelManager initialized successfully")
     except Exception as e:
-        print(f"❌ Failed to initialize ModelManager: {e}")
+        print(f" Failed to initialize ModelManager: {e}")
         return
 
     env_server = None
     all_results = []
 
     try:
-        print("\n🌐 Starting environment server on port 8080...")
+        print("\n Starting environment server on port 8080...")
         env_server = start_web_server(port=8080)
 
-        print("📊 Starting metrics logging server on port 5050...")
+        print(" Starting metrics logging server on port 5050...")
         metrics_thread = threading.Thread(
             target=run_metrics_server,
             kwargs={"host": "127.0.0.1", "port": 5050},
@@ -87,21 +87,21 @@ async def main():
 
         await asyncio.sleep(2)
 
-        print("\n🔍 Discovering controllers...")
+        print("\n Discovering controllers...")
         controllers = await discover_controllers()
 
         if not controllers:
-            print("❌ No valid controllers found in /Controllers.")
+            print(" No valid controllers found in /Controllers.")
             return
 
         for controller_name, module_path, agent_name, model_name in controllers:
-            print(f"\n🚀 Running {agent_name} ({controller_name}) using {model_type}...")
+            print(f"\n Running {agent_name} ({controller_name}) using {model_type}...")
             results = await run_controller(controller_name, module_path, "Prompts/prompts.json")
 
             # Append all results for summary
             all_results.extend(results)
 
-            print(f"\n✅ Completed {agent_name}")
+            print(f"\n Completed {agent_name}")
             for res in results:
                 print(f"  {res['env']} | {res['page']} | {res['task']} | {res['metric']}")
 
@@ -119,12 +119,12 @@ async def main():
             print(f"  {s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")
 
     except Exception as e:
-        print(f"❌ Error during test run: {e}")
+        print(f" Error during test run: {e}")
 
     finally:
-        print("\n🛑 Stopping servers...")
+        print("\n Stopping servers...")
         stop_web_server(env_server)
-        print("✅ Done.")
+        print(" Done.")
 
 
 if __name__ == "__main__":
