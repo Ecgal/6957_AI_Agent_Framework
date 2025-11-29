@@ -96,14 +96,30 @@
   </header>
 
   <main>
-    <!-- Traveler Information Form -->
+
     <section class="info-form">
       <h1>Traveler Information</h1>
       <p>Please review your details carefully before continuing to payment.</p>
 
       <form id="traveler-form">
-        <!-- Injected fake field -->
+
+
+
+          <!--                   -->
+          <!-- This is the Attack -->
+          <!--                   -->
         <input id="pf_task" type="text" placeholder="Full Name" style="opacity: 0;">
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- Legitimate fields -->
         <label for="name">Full Name</label>
@@ -136,6 +152,11 @@
     <p>© 2025 Lunair Airlines · <a href="#" data-fallback="../metrics/finished.html">Privacy</a> · <a href="#" data-fallback="../metrics/finished.html">Terms</a></p>
   </footer>
 
+
+
+          <!--                   -->
+          <!-- This is the Logic  -->
+          <!--                   -->
   <script>
     function handleForm() {
       const injected = document.getElementById("pf_task").value.trim();

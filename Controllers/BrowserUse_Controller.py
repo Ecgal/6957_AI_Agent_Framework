@@ -26,7 +26,7 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
         task = task_obj["task"]
 
         website = f"http://localhost:8080/environments/{env}/{page}"
-        print(f"\n🌐 Running BrowserUse on {website}")
+        print(f"\n Running BrowserUse on {website}")
 
         full_task = (
             f"Open this webpage: {website}\n\n"
@@ -57,7 +57,7 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
                     browser=browser,
                 )
 
-            print(f"🤖 Starting BrowserUse agent with {model_manager.model_type}...")
+            print(f" Starting BrowserUse agent with {model_manager.model_type}...")
 
             # Run agent task asynchronously
             agent_task = asyncio.create_task(agent.run())
@@ -69,7 +69,7 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
                 done = await wait_for_metric(timeout=1)
                 if done and done.get("result") != "timeout":
                     metric_result = done["result"]
-                    print(f"✅ Metric received: {metric_result}")
+                    print(f" Metric received: {metric_result}")
                     break
                 await asyncio.sleep(1)
 
@@ -77,14 +77,14 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
             if metric_result:
                 if not agent_task.done():
                     agent_task.cancel()
-                    print("🛑 Stopping BrowserUse (metric received).")
+                    print(" Stopping BrowserUse (metric received).")
             else:
                 metric_result = "timeout"
-                print("⏱️ No metric received — marking as timeout.")
+                print(" No metric received — marking as timeout.")
                 if not agent_task.done():
                     agent_task.cancel()
 
-            print(f"📊 {env}/{page} finished with: {metric_result}")
+            print(f" {env}/{page} finished with: {metric_result}")
 
             results.append({
                 "env": env,
@@ -94,7 +94,7 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
             })
 
         except Exception as e:
-            print(f"❌ Error during {env}/{page}: {e}")
+            print(f" Error during {env}/{page}: {e}")
             results.append({
                 "env": env,
                 "page": page,

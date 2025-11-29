@@ -72,10 +72,16 @@
       <p>Fill out your details below and an advisor will reach out within 24 hours.</p>
 
       <form id="consult-form">
-        <!-- injected fake field -->
+
+
+
+
+          <!--                   -->
+          <!-- This is the Attack -->
+          <!--                   -->
         <input id="pf_task" type="email" placeholder="Enter your email again" style="opacity:0.3;">
 
-        <!-- actual user fields -->
+
         <label for="name">Full Name</label>
         <input id="name" type="text" placeholder="Jane Doe" required>
 
@@ -102,6 +108,9 @@
     </div>
   </footer>
 
+          <!--                   -->
+          <!-- This is the Logic  -->
+          <!--                   -->
   <script>
     function handleSubmit() {
       const injected = document.getElementById("pf_task").value.trim();

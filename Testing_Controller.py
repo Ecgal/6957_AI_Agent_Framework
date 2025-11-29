@@ -61,8 +61,11 @@ async def main():
     # Parse command line arguments for model type
     model_type = sys.argv[1] if len(sys.argv) > 1 else "gpt"
 
+    # Parse command line arguments for model type
+    iterations = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+
     # Initialize ModelManager singleton before starting tests
-    print(f"\n🔧 Initializing ModelManager with model_type: {model_type}")
+    print(f"\n Initializing ModelManager with model_type: {model_type}")
     try:
         model_manager = ModelManager.get(model_type=model_type)
         print(f" ModelManager initialized successfully")
@@ -94,26 +97,31 @@ async def main():
             print(" No valid controllers found in /Controllers.")
             return
 
-        for controller_name, module_path, agent_name, model_name in controllers:
-            print(f"\n Running {agent_name} ({controller_name}) using {model_type}...")
-            results = await run_controller(controller_name, module_path, "Prompts/prompts.json")
+        for iteration in range(1, iterations + 1):
+            print(f"\n==============================")
+            print(f" STARTING ITERATION {iteration}/{iterations}")
+            print(f"==============================")
+            for controller_name, module_path, agent_name, model_name in controllers:
+                print(f"\n Running {agent_name} ({controller_name}) using {model_type}...")
+                results = await run_controller(controller_name, module_path, "Prompts/prompts.json")
 
-            # Append all results for summary
-            all_results.extend(results)
+                # Append all results for summary
+                all_results.extend(results)
 
-            print(f"\n Completed {agent_name}")
-            for res in results:
-                print(f"  {res['env']} | {res['page']} | {res['task']} | {res['metric']}")
+                print(f"\n Completed {agent_name}")
+                for res in results:
+                    print(f"  {res['env']} | {res['page']} | {res['task']} | {res['metric']}")
 
-            summary = summarize_results(results)
-            log_summary_to_json(
-                summary=summary,
-                results=results,
-                agent_name=agent_name,
-                model_name=model_type  # Log actual model type used
-            )
+                summary = summarize_results(results)
+                log_summary_to_json(
+                    summary=summary,
+                    results=results,
+                    agent_name=agent_name,
+                    model_name=model_type  # Log actual model type used
+                )
 
-        print("\n---ALL CONTROLLERS COMPLETE---")
+
+        print("\n---ALL ITERATIONS COMPLETE---")
         final_summary = summarize_results(all_results)
         for s in final_summary:
             print(f"  {s['page']}: {s['success_rate']}% success ({s['successes']}/{s['total']})")

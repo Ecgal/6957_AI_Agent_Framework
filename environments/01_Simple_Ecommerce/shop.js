@@ -9,7 +9,7 @@
   //Cart helpers
 
 
-  //load  cart from local storage or make an empty array, which should be empty for the agents
+  //load cart from local storage or make an empty array, which should be empty for the agents
   function loadCart() {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }

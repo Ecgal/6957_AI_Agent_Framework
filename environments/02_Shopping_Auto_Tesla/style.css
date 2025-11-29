@@ -14,17 +14,17 @@ body, html {
   line-height: 1.5;
 }
 body, html {
-  font-weight: 300;   /* slightly lighter */
+  font-weight: 300;
   line-height: 1.6;
 }
 h1, h2, h3 {
-  font-weight: 400;   /* lighter than typical headings */
+  font-weight: 400;
   letter-spacing: -0.5px;
 }
 
 /* ----- Links ----- */
 a {
-  color: #362a2a;         /* Tesla red for links/highlight items */
+  color: #362a2a;
   text-decoration: none;
 }
 
@@ -34,8 +34,8 @@ a:hover, a:focus {
 
 /* ----- Buttons ----- */
 .btn, button {
-  border-radius: 0;              /* square corners */
-  background-color: #171a20;     /* Tesla’s black */
+  border-radius: 0;
+  background-color: #171a20;
   color: #fff;
 }
 
@@ -46,7 +46,7 @@ a:hover, a:focus {
 }
 
 .btn:hover {
-  background-color: #000;        /* darker black */
+  background-color: #000;
 }
 
 /* ----- Layout Helpers ----- */
@@ -227,20 +227,20 @@ input:focus, textarea:focus {
 .split-image img {
   width: 100%;
   height: 100%;
-  max-height: 600px;       /* keeps them from being huge */
-  object-fit: cover;       /* crops instead of stretching */
-  border-radius: 8px;      /* optional, Tesla usually doesn’t round */
+  max-height: 600px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Highlights + Benefit icons */
 .spec img, .benefit img, .resource img {
   width: 48px;
   height: 48px;
-  object-fit: contain;     /* keeps aspect ratio inside square */
+  object-fit: contain;
   margin-bottom: 0.75rem;
 }
 
-/* Ensure all resource/benefit cards stay aligned */
+
 .resources .card, .benefits .card {
   display: flex;
   flex-direction: column;
