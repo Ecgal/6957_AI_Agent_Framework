@@ -7,7 +7,8 @@ import tempfile
 import textwrap
 from Controllers.BaseController import BaseController
 from dotenv import load_dotenv
-from utils import load_environment, wait_for_metric
+from servers.environment_server import load_environment
+from servers.metrics_server import wait_for_metric
 
 AGENT_NAME = "LiteWebAgent"
 MODEL_NAME = "gpt-4o"

@@ -1,73 +1,6 @@
-import asyncio
-import subprocess
+
+
 from collections import defaultdict
-
-import uvicorn
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
-from starlette.middleware.cors import CORSMiddleware
-import os
-from dotenv import load_dotenv
-
-app = FastAPI()
-
-
-#permissions are pretty open to communicate to our metrics server
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-# store the metrics received, for example, after one log it should look like {"last":{"result":"AIA}}
-metrics_results = {}
-
-
-
-# This is to handle the CORS preflight OPTIONS request before POST
-@app.options("/log")
-async def options_log():
-    response = JSONResponse(content={"status": "ok"})
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    return response
-
-
-# receives the metrics in JSON and saves into Metrics_results
-@app.post("/log")
-async def log_event(request: Request):
-    data = await request.json()
-    result = data.get("result")
-
-    print(f" Metric logged: {result}")
-    metrics_results["last"] = {"result": result}
-    return {"status": "ok"}
-
-
-#helper to actively wait for the metrics
-async def wait_for_metric(timeout):
-    start = asyncio.get_event_loop().time()
-    while (asyncio.get_event_loop().time() - start) < timeout:
-        if metrics_results:
-            key, value = metrics_results.popitem()
-            return {"result": value}
-        await asyncio.sleep(0.5)
-    return {"result": "timeout"}
-
-#start the FastAPI server ( where our metrics log is)
-def run_metrics_server(host="localhost", port=5000):
-    uvicorn.run(app, host=host, port=port)
-
-# Web server for our environment
-def start_web_server(port=8080):
-    return subprocess.Popen(["python3", "-m", "http.server", str(port)])
-
-#Stop the webserver used after the tests  are done
-def stop_web_server(proc):
-    proc.terminate()
 
 
 #takes all the raw results from then group by page.
@@ -100,12 +33,3 @@ def summarize_results(results):
             "total": vals["total"]
         })
     return summary
-def load_environment():
-
-    env_path = os.path.join(".env")
-
-    if os.path.exists(env_path):
-        load_dotenv(env_path)
-        print(f" Loaded environment from {env_path}")
-    else:
-        print("No .env file found, relying on system environment.")

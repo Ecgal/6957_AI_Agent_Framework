@@ -3,7 +3,7 @@ import json
 import asyncio
 from dotenv import load_dotenv
 from browser_use import Agent, Browser, ChatOpenAI, ChatMiniCPM
-from utils import wait_for_metric
+from servers.metrics_server import wait_for_metric
 from model_manager import ModelManager
 
 AGENT_NAME = "BrowserUse"

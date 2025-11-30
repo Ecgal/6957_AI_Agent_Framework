@@ -133,7 +133,7 @@ class ModelManager:
         self.api_key = os.getenv("OPENAI_API_KEY")
         if not self.api_key:
             raise ValueError("OPENAI_API_KEY not found in environment variables")
-        print(f"✅ GPT model initialized with API key")
+        print(f" GPT model initialized with API key")
 
     # --------------------------
     # MiniCPM initialization
@@ -194,4 +194,4 @@ class ModelManager:
         except Exception:
             self.processor = None
 
-        print("✅ MiniCPM model initialized successfully")
+        print(" MiniCPM model initialized successfully")

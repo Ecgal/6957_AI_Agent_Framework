@@ -3,7 +3,7 @@ import json
 import asyncio
 from dotenv import load_dotenv
 from seeact.agent import SeeActAgent
-from utils import wait_for_metric
+from servers.metrics_server import wait_for_metric
 from model_manager import ModelManager
 
 AGENT_NAME = "SeeAct"
@@ -37,7 +37,7 @@ async def run_seeact(prompts_file="prompts.json"):
         task = task_obj["task"]
 
         website = f"http://localhost:8080/environments/{env}/{page}"
-        print(f"\n🌐 Running SeeAct on {website}")
+        print(f"\n Running SeeAct on {website}")
 
         # Initialize agent based on model type
         if model_manager.model_type == "gpt":
@@ -70,7 +70,7 @@ async def run_seeact(prompts_file="prompts.json"):
                 # Metric received
                 if done and done.get("result") != "timeout":
                     metric_result = done["result"]
-                    print(f"✅ Metric received: {metric_result}")
+                    print(f" Metric received: {metric_result}")
                     break
 
             # If no metric arrived during the loop, do one last wait
@@ -78,7 +78,7 @@ async def run_seeact(prompts_file="prompts.json"):
                 done = await wait_for_metric(timeout=30)  # in seconds
                 metric_result = done.get("result", "timeout")
 
-            print(f"📊 {env}/{page} finished with: {metric_result}")
+            print(f"  {env}/{page} finished with: {metric_result}")
 
             results.append({
                 "env": env,
@@ -89,7 +89,7 @@ async def run_seeact(prompts_file="prompts.json"):
 
         # Catch any errors and append the results to reflect the error
         except Exception as e:
-            print(f"❌ Error during {env}/{page}: {e}")
+            print(f" Error during {env}/{page}: {e}")
             results.append({
                 "env": env,
                 "page": page,

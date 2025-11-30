@@ -7,8 +7,10 @@ import inspect
 import uvloop
 
 from logger import log_summary_to_json
-from utils import start_web_server, stop_web_server, run_metrics_server, summarize_results
+ # from utils import start_web_server, stop_web_server, run_metrics_server, summarize_results
 from model_manager import ModelManager
+from servers.metrics_server import run_metrics_server, wait_for_metric
+from servers.environment_server import start_web_server, stop_web_server, summarize_results, load_environment
 
 sys.path.append(os.path.dirname(__file__))
 sys.path.append(os.path.join(os.path.dirname(__file__), "LiteWebAgent"))
