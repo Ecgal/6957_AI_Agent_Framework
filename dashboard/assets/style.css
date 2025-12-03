@@ -1,0 +1,160 @@
+/* ========== GLOBAL THEME ========== */
+body {
+  background: linear-gradient(
+    180deg,
+    #434449 0%,
+    #0f0f10 100%
+  );
+  color: #eaeaea;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Section Headers */
+.section-title {
+  border-left: 4px solid #0078d4;
+  padding-left: 10px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #eaeaea;
+}
+
+/* ========== LAYOUT GRID ========== */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.full-card,
+.half-card {
+  background-color: #1e1f23;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: visible;
+}
+
+.full-card {
+  flex: 1 1 100%;
+  max-width: 100%;
+  min-height: 450px;
+  box-sizing: border-box;
+}
+
+.half-card {
+  flex: 1 1 calc(50% - 15px);
+  max-width: calc(50% - 15px);
+  min-height: 450px;
+  box-sizing: border-box;
+}
+
+/* Hover animation */
+.full-card:hover,
+.half-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 10px rgb(6, 140, 239);;
+}
+
+/* ========== PLOTLY SAFE SETTINGS ========== */
+
+/* prevent clipping of long axis labels */
+.js-plotly-plot .main-svg {
+  overflow: visible !important;
+}
+
+
+.half-card .dash-graph,
+.half-card .dash-graph > div,
+.half-card .js-plotly-plot {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 auto !important;
+  box-sizing: border-box !important;
+}
+
+
+.dash-button, button {
+  background-color: #0078d4;
+  color: #eaeaea;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.dash-button:hover, button:hover {
+  background-color: #0094ff;
+  transform: translateY(-2px);
+}
+
+.dash-button:active, button:active {
+  transform: translateY(0px);
+  background-color: #006bbd;
+}
+
+.Select-control {
+  background-color: #1e1f23 !important;
+  border: 1px solid #3a3b3f !important;
+  border-radius: 8px !important;
+  color: #eaeaea !important;
+  box-shadow: none !important;
+}
+
+.Select-control:hover {
+  border-color: #4a4b50 !important;
+}
+
+.is-focused .Select-control {
+  border-color: #0094ff !important;
+  box-shadow: 0 0 0 1px #0094ff !important;
+}
+.Select-menu-outer {
+  background-color: #1e1f23 !important;
+  border: 1px solid #3a3b3f !important;
+}
+
+.Select-option {
+  background-color: #1e1f23 !important;
+  color: #eaeaea !important;
+}
+
+.Select-option:hover {
+  background-color: #2c2d31 !important;
+}
+
+.Select--multi .Select-value {
+  background-color: #1a1b1f !important;
+  border: 1px solid #3a3b3f !important;
+  color: #eaeaea !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+}
+
+.Select-value-icon {
+  color: #999 !important;
+}
+
+.Select-value-icon:hover {
+  color: #fff !important;
+  background-color: #3a3b3f !important;
+}
+.dropdown-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.dropdown-col {
+  flex: 1;
+}
+
