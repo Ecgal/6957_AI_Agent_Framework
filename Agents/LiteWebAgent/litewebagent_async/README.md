@@ -1,0 +1,2 @@
+# LiteWebAgent Async Version
+This asynchronous implementation of LiteWebAgent is optimized for FastAPI backends. We've added API routes and adapted the async version for our backend repository at https://github.com/PathOnAI/LiteWebAgent-backend, which we deploy using Vercel.

@@ -1,4 +1,4 @@
-from utils import summarize_results
+from Utils.utils import summarize_results
 
 fake_results = [
     {"env": "01_Simple_Ecommerce", "page": "AIA.html", "task": "Buy headphones", "metric": {"result": "AIA"}},

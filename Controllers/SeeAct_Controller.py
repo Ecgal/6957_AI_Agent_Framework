@@ -1,10 +1,26 @@
-import os
+
+"""
+SeeAct is another special case in the framework. It has its own full action
+loop (predict, execute, repeat), a ranking model, and doesn't cleanly fit
+into the BaseController pattern. Instead of exposing a simple run() call,
+SeeAct expects you to manually drive its step-by-step interaction cycle.
+
+Because of that, this file acts as the SeeAct "runner" and handles everything:
+- loading the correct model (GPT or MiniCPM)
+- wiring in the ranking model SeeAct needs
+- looping predict() and execute() until the task is done
+- checking the metric server after every SeeAct action
+- stopping early if the metric arrives
+- cleaning up the agent at the end
+
+"""
+
 import json
 import asyncio
 from dotenv import load_dotenv
-from seeact.agent import SeeActAgent
-from servers.metrics_server import wait_for_metric
-from model_manager import ModelManager
+from Agents.seeact.agent import SeeActAgent
+from Servers.metrics_server import wait_for_metric
+from Utils.model_manager import ModelManager
 
 AGENT_NAME = "SeeAct"
 MODEL_NAME = "dynamic"  # Will be set based on ModelManager
@@ -19,7 +35,7 @@ async def run_seeact(prompts_file="prompts.json"):
     # Get the global ModelManager instance
     model_manager = ModelManager.get()
 
-    # Pre-load ranking model if using MiniCPM (since SeeAct always needs it)
+    # Pre load ranking model if using MiniCPM (since SeeAct always needs it)
     if model_manager.model_type == "minicpm":
         # Ensure ranking model is loaded before running tasks
         model_manager.get_ranking_model(ranker_path=RANKER_PATH)

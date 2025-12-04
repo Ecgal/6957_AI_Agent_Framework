@@ -1,4 +1,25 @@
-# Controllers/LiteWebAgent_Controller.py
+
+"""
+LiteWebAgent is the most difficult agent to integrate because it doesn't run
+cleanly inside the framework's normal async lifecycle. It also has heavy
+dependencies, patches Playwright internally, and generally doesn't like being
+run from inside another Python event loop.
+
+To get around that, this controller builds and launches a completely separate
+temporary runner script. That runner is isolated from the main process, gets
+its own environment, and handles all the LiteWebAgent setup/teardown without
+messing with the orchestrator or any of the other agents.
+
+So the idea here is:
+- Generate a temporary "litewebagent_runner.py" file
+- That file sets up paths, fixes Playwright, loads env vars, creates the agent,
+  and runs the LiteWebAgent task
+- Meanwhile, the controller listens for the metric server to report the attack
+  result
+
+"""
+
+
 import asyncio
 import json
 import os
@@ -7,8 +28,8 @@ import tempfile
 import textwrap
 from Controllers.BaseController import BaseController
 from dotenv import load_dotenv
-from servers.environment_server import load_environment
-from servers.metrics_server import wait_for_metric
+from Servers.environment_server import load_environment
+from Servers.metrics_server import wait_for_metric
 
 AGENT_NAME = "LiteWebAgent"
 MODEL_NAME = "gpt-4o"

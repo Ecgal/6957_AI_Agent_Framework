@@ -1,10 +1,26 @@
-import os
+
+
+"""
+This file handles the BrowserUse agent implementation for the testing framework.
+BrowserUse works differently than the other agents because it already comes with
+its own internal action loop, so instead of building a full controller class,
+this script wraps BrowserUse in the same structure that the orchestrator expects.
+
+These steps include:
+- Load tasks from the prompts file
+- For each task, spin up a BrowserUse agent
+- Let it interact with the test environment
+- At the same time, wait for the metric server to report whether the agent
+  succeeded or failed the attack scenario
+- Once the metric arrives, stop the agent and log the result
+"""
+
 import json
 import asyncio
 from dotenv import load_dotenv
-from browser_use import Agent, Browser, ChatOpenAI, ChatMiniCPM
-from servers.metrics_server import wait_for_metric
-from model_manager import ModelManager
+from Agents.browser_use import Agent, Browser, ChatOpenAI, ChatMiniCPM
+from Servers.metrics_server import wait_for_metric
+from Utils.model_manager import ModelManager
 
 AGENT_NAME = "BrowserUse"
 MODEL_NAME = "dynamic"  # Will be set based on ModelManager
@@ -40,10 +56,12 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
             browser = Browser(headless=False)
 
             # Initialize agent based on model type
+            # gpt = api usage
             if model_manager.model_type == "gpt":
                 llm = ChatOpenAI(model="gpt-4o")
                 agent = Agent(task=full_task, llm=llm, browser=browser)
 
+            # minicpm = local usage
             elif model_manager.model_type == "minicpm":
                 llm = ChatMiniCPM()
                 agent = Agent(
@@ -103,7 +121,7 @@ async def run_browseruse(prompts_file="Prompts/prompts.json"):
             })
 
         finally:
-            # Graceful shutdown of BrowserUse and Chrome process
+            # shutdown of BrowserUse and Chrome process
             try:
                 if agent and hasattr(agent, "close"):
                     await agent.close()
