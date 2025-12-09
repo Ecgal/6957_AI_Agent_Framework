@@ -14,14 +14,16 @@ extra things:
 - fills in missing environments with a default "no results" row so charts
   don't break or drop categories
 """
-
+import os
 from collections import defaultdict
 import json, glob
 import pandas as pd
 
 def load_results(results_dir="results"):
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    folder = os.path.join(project_root, results_dir)
+    files = glob.glob(os.path.join(folder, "results_*.json"))
     # Load all results_*.json files from the results directory
-    files = glob.glob(f"../{results_dir}/results_*.json")
     records = []
 
     for f in files:
@@ -75,3 +77,5 @@ def load_results(results_dir="results"):
 
     df = pd.DataFrame(records)
     return df
+
+

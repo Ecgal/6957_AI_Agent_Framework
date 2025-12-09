@@ -28,10 +28,7 @@ A few important notes about how this file is structured:
      currently viewing.
 
 """
-
-
-
-
+import pandas as pd
 from dash import Dash, html, dcc, Input, Output, dash_table, ctx
 from data_loader import load_results
 from exporter import export_filtered_csv
@@ -59,6 +56,8 @@ app = Dash(__name__, title="Attack Summary")
 app.layout = html.Div([
     html.H1("AI Agent Attack Performance Summary",
             style={"textAlign": "center", "marginBottom": "30px"}),
+    dcc.Interval(id="live-update", interval=10*1000, n_intervals=0),
+    dcc.Store(id="live-data-store"),
 
 
     # FILTERS & EXPORT
@@ -175,25 +174,45 @@ app.layout = html.Div([
     Output("model-time-trend", "figure"),
     Output("agent-model-time-trend", "figure"),
     Input("agent-select", "value"),
-    Input("model-select", "value")
+    Input("model-select", "value"),
+    Input("live-data-store", "data")
 )
-def update_dashboard(agents, models):
-    figs = update_charts(agents, models)
-    filtered = df[df["agent"].isin(agents) & df["model"].isin(models)]
+
+
+
+
+def update_dashboard(agents, models, live_data):
+    live_df = pd.DataFrame(live_data)
+    update_charts_live = generate_charts(live_df)
+    figs = update_charts_live(agents, models)
+    filtered = live_df[live_df["agent"].isin(agents) & live_df["model"].isin(models)]
     heatmap = make_page_env_heatmap(filtered)
     comparison_fig = make_recent_vs_all_by_attack(filtered)
     fig_model_time = make_model_time_trend(filtered)
     fig_agent_model_time = make_agent_model_time_trend(filtered)
     return (*figs[:5], filtered.to_dict("records"), *figs[5:],heatmap,comparison_fig,fig_model_time, fig_agent_model_time)
 
+
+@app.callback(
+    Output("live-data-store", "data"),
+    Input("live-update", "n_intervals")
+)
+def refresh_results(_):
+    fresh_df = load_results()
+    return fresh_df.to_dict("records")
+
+
+
 @app.callback(
     Output("download-dataframe-csv", "data"),
     Input("export-btn", "n_clicks"),
     Input("agent-select", "value"),
-    Input("model-select", "value")
+    Input("model-select", "value"),
+    Input("live-data-store", "data")
 )
-def handle_export(n_clicks, agents, models):
-    return export_filtered_csv(df, agents, models, ctx, n_clicks)
+def handle_export(n_clicks, agents, models, live_data):
+    df_live = pd.DataFrame(live_data)
+    return export_filtered_csv(df_live, agents, models, ctx, n_clicks)
 
 if __name__ == "__main__":
     app.run_server(debug=True, port=8050)
