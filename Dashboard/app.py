@@ -185,12 +185,30 @@ def update_dashboard(agents, models, live_data):
     live_df = pd.DataFrame(live_data)
     update_charts_live = generate_charts(live_df)
     figs = update_charts_live(agents, models)
-    filtered = live_df[live_df["agent"].isin(agents) & live_df["model"].isin(models)]
+
+    filtered = live_df[
+        live_df["agent"].isin(agents) &
+        live_df["model"].isin(models)
+    ]
+    if "timestamp" in filtered.columns:
+        log_df = filtered.sort_values("timestamp", ascending=False)
+    else:
+        log_df = filtered
+
     heatmap = make_page_env_heatmap(filtered)
     comparison_fig = make_recent_vs_all_by_attack(filtered)
     fig_model_time = make_model_time_trend(filtered)
     fig_agent_model_time = make_agent_model_time_trend(filtered)
-    return (*figs[:5], filtered.to_dict("records"), *figs[5:],heatmap,comparison_fig,fig_model_time, fig_agent_model_time)
+
+    return (
+        *figs[:5],
+        log_df.to_dict("records"),
+        *figs[5:],
+        heatmap,
+        comparison_fig,
+        fig_model_time,
+        fig_agent_model_time
+    )
 
 
 @app.callback(
